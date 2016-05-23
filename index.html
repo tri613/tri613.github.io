@@ -3,10 +3,51 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>lalalalalala</title>
+	<title>Tri's zone</title>
 	<link rel="stylesheet" href="">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<style type="text/css">
+		.progress_bar_wrapper{
+			width: 570px;
+		    background-color: #E8E8E8;
+		    height: 10px;
+		}
+		.progress_bar{
+			width: 0;
+			overflow: hidden;
+			height: 100%;
+			background-color: #2FECAD;
+		}
+	</style>
 </head>
 <body>
-	Yeah!!!!this is my index!!!!!!!
+
+小P說，就叫這個名字吧。
+
+<div class="progress_bar_wrapper">
+	<div class="progress_bar" id="the_bar"></div>
+</div>
+
+<script type="text/javascript">
+	function adding(){
+		setTimeout(function(){
+			if(!counter()){
+				adding();				
+			};
+		},50);
+	};
+	var counter = (function(){
+		var w = 0;
+		return function(){
+			if(w >= 100){ return true;}
+			w += 1;
+			document.getElementById('the_bar').style.width = w+'%';
+		};
+	}());
+
+	adding();
+
+</script>
+
 </body>
 </html>
