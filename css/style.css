@@ -1,0 +1,44 @@
+.progress_bar_wrapper{
+	width: 570px;
+    background-color: #E8E8E8;
+    height: 10px;
+}
+.progress_bar{
+	width: 0;
+	overflow: hidden;
+	height: 100%;
+	background-color: #2FECAD;
+}
+#main{
+	width: 100%;
+	height: 400px;
+	opacity: 0.8;
+	background-color: #37FA8C;
+}
+#main:before{
+    content: '';    
+    display: inline-block;    
+    vertical-align: middle;    
+    height: 100%;
+}
+#main-container{
+	display: inline-block;    
+    vertical-align: middle;
+
+    opacity: 0;
+    -ms-transform: translate(0,-20px); /* IE 9 */
+    -webkit-transform: translate(0,-20px); /* Safari */
+    transform: translate(0,-20px);
+
+    -webkit-transition: 1s ease-in-out;
+    -moz-transition: 1s ease-in-out;
+    -o-transition: 1s ease-in-out;
+    transition: 1s ease-in-out;
+}
+
+#main-container.active{
+	opacity: 1;
+	-ms-transform: translate(0,0); /* IE 9 */
+    -webkit-transform: translate(0,-0); /* Safari */
+    transform: translate(0,0);
+}
