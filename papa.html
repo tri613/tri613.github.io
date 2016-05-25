@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Papa</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+	<!-- <link rel="stylesheet" href="css/style.css"> -->
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+	<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
+
+<style type="text/css" media="screen">
+.main{
+	width: 100%;
+	/*height: 400px;*/
+	height: 100vh;
+	position: absolute;
+	background: #259bff;
+}
+.helper{
+    content: '';    
+    display: inline-block;    
+    vertical-align: middle;    
+    /*height: 100%;*/
+	height: 100vh;
+    position: relative;
+}
+.mask{
+	/*position: absolute;*/
+	background: white;
+	z-index: 2;
+	/*height: 100%;*/
+	/*width: 100%;*/
+	/*top: 0;*/
+	overflow: hidden;
+}
+.main-container{
+	display: inline-block;    
+    vertical-align: middle;
+}
+
+.fadein{
+    opacity: 0;
+    -ms-transform: translate(0,-20px); /* IE 9 */
+    -webkit-transform: translate(0,-20px); /* Safari */
+    transform: translate(0,-20px);
+    -webkit-transition: 1s ease-in-out;
+    -moz-transition: 1s ease-in-out;
+    -o-transition: 1s ease-in-out;
+    transition: 1s ease-in-out;
+}
+.fadein.active{
+    opacity: 1;
+    -ms-transform: translate(0,0); /* IE 9 */
+    -webkit-transform: translate(0,-0); /* Safari */
+    transform: translate(0,0);
+}
+
+.tri{
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 80px 100px 0 100px;
+	border-color: #259bff transparent transparent;
+}
+.tri-icon{
+    margin-top: -10vh;
+    z-index: 2;
+    position: relative;
+    font-size: 4vw;
+    color:#FFF;
+}
+
+.mails-wrapper{
+	width: 100%;margin-top: 60px;
+}
+.mail{
+	width: 49%;
+	height: 300px;
+	display: inline-block;
+}
+.mail-icon{
+	border-radius: 50%;
+	background: ;
+	width: 150px;height: 150px;
+	font-size: 20px;
+}
+
+</style>
+
+</head>
+<body>
+
+<div id="wrapper">
+
+<div class="main mask fillup text-center">
+	<div class="helper"></div>
+	<div class="main-container">
+		<h1 style="color:#259bff;font-size: 10vw;">SUPER HUGE<br> TEXT</h1>
+	</div>
+</div>
+
+<div class="main text-center ">
+	<div class="helper"></div>
+	<div class="main-container">
+		<h1 style="color:#FFF;font-size: 10vw;">SUPER HUGE<br> TEXT</h1>
+		<h2 class="col-lg-12 fadein subtitle">and then the small one</h2>
+	</div>
+</div>
+
+<div class="page hidden">
+	<div class="arrow fadein scrollin">
+		<div class="tri center-block"></div>
+		<div class="tri-icon text-center"><i class="fa fa-commenting-o" aria-hidden="true"></i></div>
+	</div>
+
+	<div class="mails-wrapper">
+		<div class="mail pull-left text-center">
+			<button class="btn mail-icon center-block"><i class="fa fa-commenting-o" aria-hidden="true"></i></button>
+		</div>
+		<div class="mail pull-right text-center">
+			<button class="btn mail-icon center-block"><i class="fa fa-commenting-o" aria-hidden="true"></i></button>
+		</div>
+	</div>
+
+</div>
+</div>
+
+
+</div>
+
+<script type="text/javascript">
+
+(function(){
+	//resize_main();
+	// processing();
+	fillup();
+	$(window).resize(resize_main);
+	$(window).scroll(check_in_view);
+})();
+
+function resize_main(){
+	var h = $(window).height();
+	$('.main').css('height',h);
+	$('.helper').css('height',h);
+}
+
+function fillup(){
+	// var h = $('.fillup').parent().height();
+	$('.fillup').animate({
+		height: 0
+	},500,'easeOutQuart',function(e){
+		$('.main').css('position','relative');
+		$('.mask').remove();
+		$('.fadein.subtitle').addClass('active');
+		$('.hidden').removeClass('hidden');
+	});
+}
+
+function check_in_view(){
+	var $window = $(window);
+	var viewTop = $window.scrollTop();
+	var viewHeight = $window.height();
+
+	$('.scrollin').each(function(i,o){
+		var element_top = $(o).offset().top;
+		if(element_top > viewTop && element_top < viewTop+viewHeight){
+			//in view
+			$(o).removeClass('hidden').addClass('active');
+		}
+	});
+}
+
+function processing(){
+	var delay = 5;
+	function adding(){
+		setTimeout(function(){
+			delay = counter();
+			console.log(delay);
+			if(delay > 0){
+				adding();				
+			}else{
+				$('.fadein').addClass('active');
+			};
+		},1);
+	};
+	var counter = (function(){
+		var h = 100;
+		return function(){
+			h-=5;
+			document.getElementById('main_mask').style.height = h+'%';
+			return h;
+		};
+	}());
+
+	adding();
+}
+
+
+</script>
+
+</body>
+</html>
