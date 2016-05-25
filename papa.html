@@ -67,7 +67,7 @@
 	border-color: #259bff transparent transparent;
 }
 .tri-icon{
-    margin-top: -10vh;
+    margin-top: -15vh;
     z-index: 2;
     position: relative;
     font-size: 4vw;
@@ -100,6 +100,7 @@
 	<div class="helper"></div>
 	<div class="main-container">
 		<h1 style="color:#259bff;font-size: 10vw;">SUPER HUGE<br> TEXT</h1>
+		<h2><span style="visibility: hidden;">asdfsdf</span></h2>
 	</div>
 </div>
 
@@ -107,7 +108,7 @@
 	<div class="helper"></div>
 	<div class="main-container">
 		<h1 style="color:#FFF;font-size: 10vw;">SUPER HUGE<br> TEXT</h1>
-		<h2 class="col-lg-12 fadein subtitle">and then the small one</h2>
+		<h2 class="fadein subtitle">and then the small one</h2>
 	</div>
 </div>
 
@@ -152,11 +153,15 @@ function fillup(){
 	// var h = $('.fillup').parent().height();
 	$('.fillup').animate({
 		height: 0
-	},500,'easeOutQuart',function(e){
+	},2000,'easeOutQuart',function(e){
 		$('.main').css('position','relative');
 		$('.mask').remove();
-		$('.fadein.subtitle').addClass('active');
 		$('.hidden').removeClass('hidden');
+		$('.fadein.subtitle').addClass('active');
+		$("html, body").animate({
+			scrollTop: 100
+		},1000);
+
 	});
 }
 
