@@ -2,7 +2,7 @@
 title: :nth-child v.s. :nth-of-type
 date: 2016-11-21 15:55:37
 tags:
-- css
+  - css
 ---
 
 # :nth-child
@@ -22,10 +22,10 @@ tags:
 </div>
 ```
 ```css
-.parent child-div:nth-child(2) {
+.parent .child-div:nth-child(2) {
     color:red; /* this will work */
 }
-.parent child-a:nth-child(1) {
+.parent .child-a:nth-child(1) {
     color:blue; /* this won't work */
 }
 ```

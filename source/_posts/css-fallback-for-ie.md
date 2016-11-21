@@ -2,8 +2,8 @@
 title: css fallback for IE(11+)
 date: 2016-11-21 16:45:40
 tags:
-- css
-- ie
+  - css
+  - ie
 ---
 
 ## 1. grayscale

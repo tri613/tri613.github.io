@@ -2,8 +2,8 @@
 title: 在mac上設置apache + php + mysql
 date: 2016-11-21 16:52:52
 tags: 
-- mamp
-- osx
+  - mamp
+  - osx
 ---
 
 ## 前前提要

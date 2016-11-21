@@ -2,9 +2,9 @@
 title: Network settings for virtualbox
 date: 2016-11-21 16:49:04
 tags:
-- vm
-- network
-- linux
+  - vm
+  - network
+  - linux
 ---
 
 \# 運行環境為 CentOS 6.5
