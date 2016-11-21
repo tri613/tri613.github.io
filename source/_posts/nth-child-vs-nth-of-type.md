@@ -37,12 +37,12 @@ tags:
 ```html
 <div class="parent">
     <div class="child-div"></div> 
-    <!-- .parent div:nth-child(1) -->
+    <!-- .parent div:nth-of-type(1) -->
     <div class="child-div"></div>
-    <!-- .parent div:nth-child(2) -->
+    <!-- .parent div:nth-of-type(2) -->
     <a class="child-a"></a>
-    <!-- .parent a:nth-child(1) -->
+    <!-- .parent a:nth-of-type(1) -->
     <a class="child-a"></a>
-    <!-- .parent a:nth-child(2) -->
+    <!-- .parent a:nth-of-type(2) -->
 </div>
 ```

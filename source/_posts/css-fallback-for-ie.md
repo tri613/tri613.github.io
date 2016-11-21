@@ -6,6 +6,8 @@ tags:
 - ie
 ---
 
+*我也不知道我當初為什麼會硬著頭皮寫英文的，反正就是英文的了哈哈哈*
+
 ## 1. grayscale
   ```css
     -webkit-filter:grayscale(100%);
