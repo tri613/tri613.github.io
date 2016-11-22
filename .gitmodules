@@ -1,0 +1,3 @@
+[submodule "themes/cactus-dark"]
+	path = themes/cactus-dark
+	url = git@github.com:tri613/cactus-dark.git
