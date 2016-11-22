@@ -22,10 +22,10 @@ tags:
 </div>
 ```
 ```css
-.parent child-div:nth-child(2) {
+.parent .child-div:nth-child(2) {
     color:red; /* this will work */
 }
-.parent child-a:nth-child(1) {
+.parent .child-a:nth-child(1) {
     color:blue; /* this won't work */
 }
 ```
