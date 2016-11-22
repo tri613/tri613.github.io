@@ -54,7 +54,6 @@ function onSuccess (googleUser) {
 function onFailure(error) {
     console.log(error);
 };
-
 ```
 
 - 在可以取得使用者的token讓後端去驗證使用者身分，並進行一些登入手續處理。（像是寫Session幹嘛的）
@@ -75,7 +74,6 @@ function sendUserTokenToServer(token) {
   };
   xhr.send('token=' + token);
 }
-
 ```
 
 ```php
@@ -102,14 +100,12 @@ if ($data->aud == MY_CLIENT_ID) {
 } else {
   echo 'User not valid.';
 }
-
 ```
 
+## 3. Login with backend server (導頁)
 
-## 3. Login with backend server
-
-或者也可以選擇直接用後端和Google溝通，
-這樣不需要load任何Google的js library或寫任何的js script，
+也可以選擇直接用後端和Google溝通，
+這樣就不需要載入Google的JS函式庫或寫任何的js script，
 只需要在前端頁面加上連到登入導頁的連結即可。
 
 Google本身提供了許多語言的sdk，
@@ -117,8 +113,8 @@ Google本身提供了許多語言的sdk，
 
 實作這個功能至少需要兩個頁面(吧)：
 
-- Login page
-  這個Login page只需要單純實現導頁至`Google登入頁面`即可。
+- Redirect to Google page
+  這個Redirect to Google page只需要單純實現導頁至`Google登入頁面`即可。
 
 ```php
 // signin-with-server.php
@@ -126,7 +122,7 @@ Google本身提供了許多語言的sdk，
 require_once __DIR__.'/vendor/autoload.php';
 
 $client = new Google_Client();
-$client->setAuthConfig(__DIR__.'/client_secret.json'); //file downloaded from Google API Console
+$client->setAuthConfig(__DIR__.'/client_secret.json'); //這個json檔可以從Google API Console下載取得
 $client->addScope('profile');
 //set redirect uri
 $client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] . '/callback.php');
@@ -137,7 +133,7 @@ exit();
 
 > check all the scopes that you can use [here](https://developers.google.com/identity/protocols/googlescopes).
 
-- Callback page
+- Google Callback page
   使用者在Google登入頁面上登入完畢後，Google會導回當初在前面設定的Redirect URI，並附上GET參數`code`。
   *Redirect URI必須存在於Google API Console的設定裡面。*
 
@@ -153,3 +149,12 @@ $access_token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
 
 var_dump($access_token);
 ```
+
+## 參考文件
+
+- [Google Sign-In for Websites](https://developers.google.com/identity/sign-in/web/)
+  其實方法大致上都可以在官方文件中找到，上面有些範例也是從官方來的，
+  只是我覺得官方文件不夠友善，有些東西都只說一半還得自己另外Google。(XD)
+
+- [OAuth 2.0 Scopes for Google APIs](https://developers.google.com/identity/protocols/googlescopes)
+- [Google API Client Libraries](https://developers.google.com/api-client-library/)
