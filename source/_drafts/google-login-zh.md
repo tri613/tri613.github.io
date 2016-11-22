@@ -56,7 +56,7 @@ function onFailure(error) {
 };
 ```
 
-- 在可以取得使用者的token讓後端去驗證使用者身分，並進行一些登入手續處理。（像是寫Session幹嘛的）
+- 在這可以取得使用者的token讓後端去驗證使用者身分，並進行一些登入手續處理。（像是寫Session幹嘛的）
 
 ```js
 //modify the onSuccess function to get user token and send it to server
