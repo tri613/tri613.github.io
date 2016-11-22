@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="VM: CentOS 6.5
+Host: Windows7
+
+VM 設定
+網卡設定
+
+第一張設 NAT
+第二張設 橋接介面卡
+
+
+確認 VM 網卡設定 
+ 1$ ifconfig
+
+確認兩張網卡都有開 eth0 / eth1
+沒有的話，就啟動網卡1$ ifconfig &amp;#123;eth0|eth1&amp;#125; &amp;#123;up|down&amp;#125;
+
+
+
+VM網卡設定
+ 1$ vim /etc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Network settings for virtualbox">
+<meta property="og:url" content="http://tri613.github.io/2016/11/21/vm-network-settings/index.html">
+<meta property="og:site_name" content="Tri's">
+<meta property="og:description" content="VM: CentOS 6.5
+Host: Windows7
+
+VM 設定
+網卡設定
+
+第一張設 NAT
+第二張設 橋接介面卡
+
+
+確認 VM 網卡設定 
+ 1$ ifconfig
+
+確認兩張網卡都有開 eth0 / eth1
+沒有的話，就啟動網卡1$ ifconfig &amp;#123;eth0|eth1&amp;#125; &amp;#123;up|down&amp;#125;
+
+
+
+VM網卡設定
+ 1$ vim /etc">
+<meta property="og:updated_time" content="2016-11-22T03:59:12.933Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Network settings for virtualbox">
+<meta name="twitter:description" content="VM: CentOS 6.5
+Host: Windows7
+
+VM 設定
+網卡設定
+
+第一張設 NAT
+第二張設 橋接介面卡
+
+
+確認 VM 網卡設定 
+ 1$ ifconfig
+
+確認兩張網卡都有開 eth0 / eth1
+沒有的話，就啟動網卡1$ ifconfig &amp;#123;eth0|eth1&amp;#125; &amp;#123;up|down&amp;#125;
+
+
+
+VM網卡設定
+ 1$ vim /etc">
+    
+    
+    <!-- title -->
+    <title>Network settings for virtualbox</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+      <ul>
+        
+        <li><a class="icon" href="/2016/11/21/mamp/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2016/11/21/css-fallback-for-ie/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+        <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://tri613.github.io/2016/11/21/vm-network-settings/"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="https://twitter.com/share?url=http://tri613.github.io/2016/11/21/vm-network-settings/&text=Network settings for virtualbox"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://tri613.github.io/2016/11/21/vm-network-settings/&title=Network settings for virtualbox"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tri613.github.io/2016/11/21/vm-network-settings/&is_video=false&description=Network settings for virtualbox"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="mailto:?subject=Network settings for virtualbox&body=Check out this article: http://tri613.github.io/2016/11/21/vm-network-settings/"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="https://getpocket.com/save?url=http://tri613.github.io/2016/11/21/vm-network-settings/&title=Network settings for virtualbox"><i class="fa fa-get-pocket" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="http://reddit.com/submit?url=http://tri613.github.io/2016/11/21/vm-network-settings/&title=Network settings for virtualbox"><i class="fa fa-reddit" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://tri613.github.io/2016/11/21/vm-network-settings/&title=Network settings for virtualbox"><i class="fa fa-stumbleupon" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="http://digg.com/submit?url=http://tri613.github.io/2016/11/21/vm-network-settings/&title=Network settings for virtualbox"><i class="fa fa-digg" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://tri613.github.io/2016/11/21/vm-network-settings/&name=Network settings for virtualbox&description="><i class="fa fa-tumblr" aria-hidden="true"></i></a></li>
+      </ul>
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#VM-設定"><span class="toc-number">1.</span> <span class="toc-text">VM 設定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本機設定"><span class="toc-number">2.</span> <span class="toc-text">本機設定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他設定"><span class="toc-number">3.</span> <span class="toc-text">其他設定</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Network settings for virtualbox
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tri's</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2016-11-21T08:49:04.000Z" itemprop="datePublished">2016-11-21</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/linux/">linux</a>, <a class="tag-link" href="/tags/network/">network</a>, <a class="tag-link" href="/tags/vm/">vm</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <ul>
+<li>VM: CentOS 6.5</li>
+<li>Host: Windows7</li>
+</ul>
+<h2 id="VM-設定"><a href="#VM-設定" class="headerlink" title="VM 設定"></a>VM 設定</h2><ol>
+<li><p>網卡設定</p>
+<ul>
+<li>第一張設 <strong>NAT</strong></li>
+<li>第二張設 <strong>橋接介面卡</strong></li>
+</ul>
+</li>
+<li><p>確認 VM 網卡設定 </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ifconfig</div></pre></td></tr></table></figure>
+<ul>
+<li>確認兩張網卡都有開 <code>eth0</code> / <code>eth1</code></li>
+<li>沒有的話，就啟動網卡<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ifconfig &#123;eth0|eth1&#125; &#123;up|down&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>VM網卡設定</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ vim /etc/sysconfig/network-scripts/ifcfg-&#123;eth0|eth1&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>eth0 (NAT) 基本上原本的設定就好，不用改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">DEVICE=eth0</div><div class="line">BOOTPROTO=dhcp</div><div class="line">HWADDR=08:00:27:92:0E:1F #your mac address</div><div class="line">ONBOOT=yes</div><div class="line">TYPE=Ethernet</div></pre></td></tr></table></figure>
+</li>
+<li><p>eth1 (橋接)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">DEVICE=eth1</div><div class="line">#BOOTPROTO=none</div><div class="line">#BROADCAST=192.168.XXX.255</div><div class="line">HWADDR=08:00:27:79:90:9d #your mac address</div><div class="line">IPADDR=192.168.XXX.VVV</div><div class="line">NETMASK=255.255.255.0</div><div class="line">#NETWORK=192.168.XXX.0</div><div class="line">ONBOOT=yes</div><div class="line">#GATEWAY=192.168.XXX.1</div><div class="line">TYPE=Ethernet</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>設定完記得重啟<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ /etc/init.d/network restart</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>檢查連線</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ping 8.8.8.8</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="本機設定"><a href="#本機設定" class="headerlink" title="本機設定"></a>本機設定</h2><ol>
+<li><p>確定有加網路區段</p>
+<blockquote>
+<p>區域連線 &gt; IPv4 &gt; 進階 &gt; IP設定</p>
+</blockquote>
+<p>增加和VM同網段的IP位址 <code>192.168.XXX.LLL</code></p>
+</li>
+<li><p>檢查是否連得到 VM</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ping 192.168.XXX.VVV</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="其他設定"><a href="#其他設定" class="headerlink" title="其他設定"></a>其他設定</h2><ul>
+<li><p>關閉防火牆</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ service iptables stop</div></pre></td></tr></table></figure>
+</li>
+<li><p>設定開機時不會開起防火牆</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ chkconfig iptables off</div></pre></td></tr></table></figure></li>
+</ul>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+    </div>
+
+
+
+      </div>
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2016 Tri&#39;s
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-67482141-4', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'tri613-github-io';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

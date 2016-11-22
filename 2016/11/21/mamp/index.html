@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="前前提要這篇是從tumblr上面搬來的，當時發表時間是2016/08/25。
+前情提要一下本人上上禮拜敗了一台mac pro，想說架個伺服器以便未來開發 
+原本在windows下我都是懶惰直接灌wamp或xampp這種一次打包好的東西， 
+所以本來想說mac也來找找有沒有類似的就好了（←很懶 
+殊不知估狗一下才發現原來mac有內建阿帕契！甚至連PHP都已經裝好了！！ 
+只有mysql需要自己灌，真">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在mac上設置apache + php + mysql">
+<meta property="og:url" content="http://tri613.github.io/2016/11/21/mamp/index.html">
+<meta property="og:site_name" content="Tri's">
+<meta property="og:description" content="前前提要這篇是從tumblr上面搬來的，當時發表時間是2016/08/25。
+前情提要一下本人上上禮拜敗了一台mac pro，想說架個伺服器以便未來開發 
+原本在windows下我都是懶惰直接灌wamp或xampp這種一次打包好的東西， 
+所以本來想說mac也來找找有沒有類似的就好了（←很懶 
+殊不知估狗一下才發現原來mac有內建阿帕契！甚至連PHP都已經裝好了！！ 
+只有mysql需要自己灌，真">
+<meta property="og:updated_time" content="2016-11-21T09:14:05.556Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在mac上設置apache + php + mysql">
+<meta name="twitter:description" content="前前提要這篇是從tumblr上面搬來的，當時發表時間是2016/08/25。
+前情提要一下本人上上禮拜敗了一台mac pro，想說架個伺服器以便未來開發 
+原本在windows下我都是懶惰直接灌wamp或xampp這種一次打包好的東西， 
+所以本來想說mac也來找找有沒有類似的就好了（←很懶 
+殊不知估狗一下才發現原來mac有內建阿帕契！甚至連PHP都已經裝好了！！ 
+只有mysql需要自己灌，真">
+    
+    
+    <!-- title -->
+    <title>在mac上設置apache + php + mysql</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+      <ul>
+        
+        <li><a class="icon" href="/2016/11/21/apns-http2/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2016/11/21/vm-network-settings/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+        <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://tri613.github.io/2016/11/21/mamp/"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="https://twitter.com/share?url=http://tri613.github.io/2016/11/21/mamp/&text=在mac上設置apache + php + mysql"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://tri613.github.io/2016/11/21/mamp/&title=在mac上設置apache + php + mysql"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tri613.github.io/2016/11/21/mamp/&is_video=false&description=在mac上設置apache + php + mysql"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="mailto:?subject=在mac上設置apache + php + mysql&body=Check out this article: http://tri613.github.io/2016/11/21/mamp/"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="https://getpocket.com/save?url=http://tri613.github.io/2016/11/21/mamp/&title=在mac上設置apache + php + mysql"><i class="fa fa-get-pocket" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="http://reddit.com/submit?url=http://tri613.github.io/2016/11/21/mamp/&title=在mac上設置apache + php + mysql"><i class="fa fa-reddit" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://tri613.github.io/2016/11/21/mamp/&title=在mac上設置apache + php + mysql"><i class="fa fa-stumbleupon" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="http://digg.com/submit?url=http://tri613.github.io/2016/11/21/mamp/&title=在mac上設置apache + php + mysql"><i class="fa fa-digg" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://tri613.github.io/2016/11/21/mamp/&name=在mac上設置apache + php + mysql&description=&lt;h2 id=&quot;前前提要&quot;&gt;&lt;a href=&quot;#前前提要&quot; class=&quot;headerlink&quot; title=&quot;前前提要&quot;&gt;&lt;/a&gt;前前提要&lt;/h2&gt;&lt;p&gt;&lt;em&gt;這篇是從tumblr上面搬來的，當時發表時間是2016/08/25。&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&quot;前情提要一下&quot;&gt;&lt;a href=&quot;#前情提要一下&quot; class=&quot;headerlink&quot; title=&quot;前情提要一下&quot;&gt;&lt;/a&gt;前情提要一下&lt;/h2&gt;&lt;p&gt;本人上上禮拜敗了一台mac pro，想說架個伺服器以便未來開發 &lt;/p&gt;
+&lt;p&gt;原本在windows下我都是懶惰直接灌wamp或xampp這種一次打包好的東西， &lt;/p&gt;
+&lt;p&gt;所以本來想說mac也來找找有沒有類似的就好了（←很懶 &lt;/p&gt;
+&lt;p&gt;殊不知估狗一下才發現原來mac有內建阿帕契！甚至連PHP都已經裝好了！！ &lt;/p&gt;
+&lt;p&gt;只有mysql需要自己灌，真是太神拉~~~（灑花）&lt;/p&gt;
+&lt;p&gt;不過話是這樣說，實際上在setup的過程中還是碰到了不少問題（中途甚至不小心玩壞怒重灌了一次XD），所以還是記錄一下整個過程好了。&lt;/p&gt;
+&lt;p&gt;# 環境　 &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;作業系統  OSX 10.11.6 &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Apache 2.4.18 (Unix) &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;PHP 5.5.36&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;"><i class="fa fa-tumblr" aria-hidden="true"></i></a></li>
+      </ul>
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前前提要"><span class="toc-number">1.</span> <span class="toc-text">前前提要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#前情提要一下"><span class="toc-number">2.</span> <span class="toc-text">前情提要一下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#設定-apache"><span class="toc-number">3.</span> <span class="toc-text">設定 apache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#設置-virtual-host"><span class="toc-number">4.</span> <span class="toc-text">設置 virtual host</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安裝-Mysql"><span class="toc-number">5.</span> <span class="toc-text">安裝 Mysql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#參考資料"><span class="toc-number">6.</span> <span class="toc-text">參考資料</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        在mac上設置apache + php + mysql
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tri's</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2016-11-21T08:52:52.000Z" itemprop="datePublished">2016-11-21</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/mamp/">mamp</a>, <a class="tag-link" href="/tags/osx/">osx</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="前前提要"><a href="#前前提要" class="headerlink" title="前前提要"></a>前前提要</h2><p><em>這篇是從tumblr上面搬來的，當時發表時間是2016/08/25。</em></p>
+<h2 id="前情提要一下"><a href="#前情提要一下" class="headerlink" title="前情提要一下"></a>前情提要一下</h2><p>本人上上禮拜敗了一台mac pro，想說架個伺服器以便未來開發 </p>
+<p>原本在windows下我都是懶惰直接灌wamp或xampp這種一次打包好的東西， </p>
+<p>所以本來想說mac也來找找有沒有類似的就好了（←很懶 </p>
+<p>殊不知估狗一下才發現原來mac有內建阿帕契！甚至連PHP都已經裝好了！！ </p>
+<p>只有mysql需要自己灌，真是太神拉~~~（灑花）</p>
+<p>不過話是這樣說，實際上在setup的過程中還是碰到了不少問題（中途甚至不小心玩壞怒重灌了一次XD），所以還是記錄一下整個過程好了。</p>
+<p># 環境　 </p>
+<ul>
+<li><p>作業系統  OSX 10.11.6 </p>
+</li>
+<li><p>Apache 2.4.18 (Unix) </p>
+</li>
+<li><p>PHP 5.5.36</p>
+</li>
+</ul>
+<a id="more"></a>
+<hr>
+<h2 id="設定-apache"><a href="#設定-apache" class="headerlink" title="設定 apache"></a>設定 apache</h2><p>既然mac都已經內建好apache了，就先來啟動apache server看看吧！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apachectl start</div></pre></td></tr></table></figure>
+<p>如果可以連到 <a href="http://localhost" target="_blank" rel="external">localhost</a> 就表示成功了！</p>
+<p>接下來就是一些apache的設定等等了， </p>
+<p>像我就會把port設成1337然後引入一些需要的module等等。 </p>
+<p>設定檔位置在 <code>/etc/apache2/httpd.conf</code> ， </p>
+<p>在finder下 cmd + shift + g 直接輸入上述位置即可。</p>
+<p>我自己的httpd.conf主要是改這些東西：</p>
+<ul>
+<li>port 改成 1337</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Listen 1337</div></pre></td></tr></table></figure>
+<ul>
+<li>載入需要的模組 （也就是把前面的＃拿掉）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">LoadModule rewrite_module libexec/apache2/mod_rewrite.so&lt;/span&gt;</div><div class="line">LoadModule php5_module libexec/apache2/libphp5.so</div></pre></td></tr></table></figure>
+<ul>
+<li>啟用 Virtual hosts</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># Virtual hosts</div><div class="line">Include /private/etc/apache2/extra/httpd-vhosts.conf</div></pre></td></tr></table></figure>
+<ul>
+<li><p>加入路徑讀取權限 </p>
+<p>如果不加，會發生  因為沒有權限而存取被拒的問題。（<strong>client denied by server configuration</strong> ） </p>
+<p>這好像是比較偷懶的權限設法，因為是本地開發沒關係， </p>
+<p>對外可能就不是這樣寫了XD </p>
+<p>路徑我自己是設成這樣 /Users/tri613/workspace/www/</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;Directory &quot;/your/path/to/site/documents&quot;&gt;</div><div class="line">  Options Indexes MultiViews FollowSymLinks</div><div class="line">  AllowOverride All</div><div class="line">  # Apache 2.4</div><div class="line">  Require all granted</div><div class="line">&lt;/Directory&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>設定user / group </p>
+<p>也是跟權限有關的設定，對linux(unix)不是特熟所以只是先設著保險（？）</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">User your_user_name </div><div class="line">Group staff</div></pre></td></tr></table></figure>
+<p>最後記得伺服器要重開剛才套用的東西才會有作用！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apachectl restart</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="設置-virtual-host"><a href="#設置-virtual-host" class="headerlink" title="設置 virtual host"></a>設置 virtual host</h2><p>設置virtual hosts就只要修改 <code>etc/apache2/extra/httpd-vhosts.conf</code> 這個檔案就可以了！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"># httpd-vhosts.conf</div><div class="line"></div><div class="line"># 第一個是如果沒有符合的網址，就會導到這裡</div><div class="line">&lt;VirtualHost *:1337&gt;</div><div class="line">    DocumentRoot &quot;/your/project/site&quot;</div><div class="line">    ServerName my.default.site.local</div><div class="line">    ErrorLog &quot;/your/logs/error.log&quot;</div><div class="line">&lt;/VirtualHost&gt;</div><div class="line"></div><div class="line"># 之後的就隨意了</div><div class="line">&lt;VirtualHost *:1337&gt;</div><div class="line">    DocumentRoot &quot;/Users/tri613/workspace/www/my-project&quot;</div><div class="line">    ServerName myproject.local</div><div class="line">    ErrorLog &quot;/Users/tri613/workspace/www/log/myproject@error_log&quot;</div><div class="line">&lt;/VirtualHost&gt;</div></pre></td></tr></table></figure>
+<p>以上內容只是範例啦，我都很懶惰只有指定這幾項而已ＸＤ</p>
+<p>另外就是要注意 <code>etc/hosts</code> 這隻檔案要加上hosts， </p>
+<p>不然打剛剛自己設定的網址是會找不到的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># etc/hosts</div><div class="line"># 以上面的virtual hosts為例</div><div class="line">127.0.0.1   myproject.local</div></pre></td></tr></table></figure></p>
+<p>大致上就是這些！</p>
+<hr>
+<h2 id="安裝-Mysql"><a href="#安裝-Mysql" class="headerlink" title="安裝 Mysql"></a>安裝 Mysql</h2><p>先去官方網站下載，然後安裝，結束～～～（誤） </p>
+<p>安裝過程會有一串預設的密碼要記著， </p>
+<p>不然到時候沒密碼會登不進去。</p>
+<p>安裝好了以後，要記得先到 <strong>系統偏好設定</strong> 裡面找到mysql並把mysql server開啟，不然不能用的。</p>
+<p>接下來就先加環境變數吧！<strike>（我絕對不會說我為了加這個把其他的指令都蓋掉惹）</strike><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 一開始應該都不會有這個檔案，所以就建一個新的</span></div><div class="line">$ touch ~/.bash_profile</div></pre></td></tr></table></figure></p>
+<p>然後在 <code>.bash_profile</code> 裡面加上<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/mysql/bin:<span class="variable">$PATH</span></div></pre></td></tr></table></figure></p>
+<p>這行就可以了！</p>
+<p>接下來就是一些mysql的初始設定等等摟。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//首次登入</div><div class="line">$ mysql -u root -p </div><div class="line">//輸入剛才安裝中給的預設密碼</div><div class="line">//登入成功後，要先換密碼</div><div class="line">mysql &gt; SET PASSWORD = PASSWORD(<span class="string">'your_new_password'</span>);</div></pre></td></tr></table></figure></p>
+<p>到這裡就可以用root身份進行一般mysql操作了，通常後續還會創root以外的使用者等等的，但因為是本地開發所以就先忽略哈哈。</p>
+<p>確定mysql可以用了以後，就是把PHP跟mysql連在一起啦～<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /var</div><div class="line">mkdir mysql</div><div class="line"><span class="built_in">cd</span> mysql</div><div class="line">ln <span class="_">-s</span> /tmp/mysql.sock mysql.sock</div></pre></td></tr></table></figure></p>
+<p>到這裡就完成基本的MAMP架設啦～ </p>
+<p>雖然感覺很簡單但我也是裝了兩遍啊哈哈哈～～～（謎</p>
+<hr>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://blog.allenchou.cc/mac-apache-php-mysql-setup/" target="_blank" rel="external">[Mac]不用懶人包，在 OS X 上安裝 Apache, PHP, MySQL</a></li>
+<li><a href="http://stackoverflow.com/questions/18392741/apache2-ah01630-client-denied-by-server-configuration" target="_blank" rel="external">Apache2: ‘AH01630: client denied by server configuration’</a></li>
+</ul>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+    </div>
+
+
+
+      </div>
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2016 Tri&#39;s
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-67482141-4', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'tri613-github-io';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
