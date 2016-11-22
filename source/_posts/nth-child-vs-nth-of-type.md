@@ -12,13 +12,13 @@ tags:
 ```html
 <div class="parent">
     <div class="child-div"></div> 
-    <!-- .parent child-div:nth-child(1) -->
+    <!-- .parent .child-div:nth-child(1) -->
     <div class="child-div"></div>
-    <!-- .parent child-div:nth-child(2) -->
+    <!-- .parent .child-div:nth-child(2) -->
     <a class="child-a"></a>
-    <!-- .parent child-a:nth-child(3) -->
+    <!-- .parent .child-a:nth-child(3) -->
     <a class="child-a"></a>
-    <!-- .parent child-a:nth-child(4) -->
+    <!-- .parent .child-a:nth-child(4) -->
 </div>
 ```
 ```css
