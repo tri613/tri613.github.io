@@ -7,7 +7,8 @@ tags:
   - linux
 ---
 
-\# 運行環境為 CentOS 6.5
+- VM: CentOS 6.5
+- Host: Windows7
 
 ## VM 設定
 
