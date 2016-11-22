@@ -5,7 +5,7 @@ tags:
 - css
 ---
 
-# :nth-child
+## :nth-child
 
 `:nth-child` 最容易誤會的地方是，它並不是搜尋父元素下的第幾個順序的selector子元素，而是單純在父元素下的**第幾個子元素**，基本上跟元素本身type或selector無關，*selector只是附加限制條件*。
 
@@ -30,7 +30,7 @@ tags:
 }
 ```
 
-# :nth-of-type
+## :nth-of-type
 
 `:nth-of-type` 就比較偏向搜尋某個父元素下面的**第幾個指定類型的子元素**，但要注意的是它只能指定html的本身的種類（像是`<a>`、`<div>`等等），而*不能用class名稱做為selector*。
 
