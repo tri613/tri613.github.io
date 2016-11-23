@@ -86,7 +86,7 @@ function sendUserTokenToServer(token) {
 $token = $_POST['token'];
 $ch = curl_init();
 curl_setopt_array($ch, array(
-  CURLOPT_URL => 'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='.$token,
+    CURLOPT_URL => 'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='.$token,
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_POST => "GET",
     CURLOPT_SSL_VERIFYPEER => false,
@@ -99,10 +99,10 @@ $data = json_decode($response);
 
 //記得先驗證 $data->aud 是否和client-id相同
 if ($data->aud == MY_CLIENT_ID) {
-  // $data->sub 則是使用者的 unique google id
-  echo $data->name; //here's the user name!
+    echo $data->name; //here's the user name!
+    echo $data->sub; //使用者的 unique google id
 } else {
-  echo 'User not valid.';
+    echo 'User not valid.';
 }
 ```
 

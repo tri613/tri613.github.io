@@ -6,8 +6,6 @@ tags:
 date: 2016-11-23 13:51:28
 ---
 
-
-
 *Assume projects are already created in [Google API Console](https://console.developers.google.com/projectselector/apis/library).*
 ## 1. Setup with meta
 
