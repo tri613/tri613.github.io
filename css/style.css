@@ -696,6 +696,8 @@ body {
   font-style: normal;
   font-weight: 200;
   color: #2bbc8a;
+  display: table;
+  float: right;
 }
 #header-post #nav ul {
   line-height: 15px;
