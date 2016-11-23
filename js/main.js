@@ -13,7 +13,7 @@ $(document).ready(function(){
       $('#menu').css('visibility','visible');
       $('#menu-icon').addClass('active');
 
-      var topDistance = $("#menu > #nav").offset().top;
+      var topDistance = $("#nav").offset().top;
 
       if ( $('#menu').css('visibility') != 'hidden' && topDistance < 50 ) {
         $("#menu > #nav").show();
@@ -33,15 +33,15 @@ $(document).ready(function(){
     $("#header > #nav > ul").toggleClass("responsive");
   });
 
-  if ( $( "#menu" ).length ) {
-    $(window).on('scroll', function() {
-      var topDistance = $("#menu > #nav").offset().top;
+  // if ( $( "#menu" ).length ) {
+  //   $(window).on('scroll', function() {
+  //     var topDistance = $("#menu > #nav").offset().top;
 
-      if ( $('#menu').css('visibility') != 'hidden' && topDistance < 50 ) {
-        $("#menu > #nav").show();
-      } else if ($('#menu').css('visibility') != 'hidden' && topDistance > 100) {
-        $("#menu > #nav").hide();
-      }
-    });
-  }
+  //     if ( $('#menu').css('visibility') != 'hidden' && topDistance < 50 ) {
+  //       $("#menu > #nav").show();
+  //     } else if ($('#menu').css('visibility') != 'hidden' && topDistance > 100) {
+  //       $("#menu > #nav").hide();
+  //     }
+  //   });
+  // }
 });

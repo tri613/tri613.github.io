@@ -683,6 +683,7 @@ body {
 #header-post #menu-icon {
   float: right;
   margin-left: 15px;
+  cursor: pointer;
 }
 #header-post .active {
   color: #2bbc8a;
