@@ -9,23 +9,25 @@ if (!!$.prototype.justifiedGallery) {  // if justifiedGallery method is defined
 
 $(document).ready(function(){
   $("#menu-icon").click(function(){
-    if ( $('#menu').css('visibility') == 'hidden' ) {
-      $('#menu').css('visibility','visible');
-      $('#menu-icon').addClass('active');
+    $('#menu').toggleClass('open');
+    $('#menu-icon').toggleClass('active');
+    // if ( $('#menu').css('display') == 'hidden' ) {
+    //   $('#menu').css('visibility','visible');
+    //   $('#menu-icon').addClass('active');
 
-      var topDistance = $("#nav").offset().top;
+    //   var topDistance = $("#nav").offset().top;
 
-      if ( $('#menu').css('visibility') != 'hidden' && topDistance < 50 ) {
-        $("#menu > #nav").show();
-      } else if ($('#menu').css('visibility') != 'hidden' && topDistance > 100) {
-        $("#menu > #nav").hide();
-      }
-      return false;
-    } else {
-      $('#menu').css('visibility','hidden');
-      $('#menu-icon').removeClass('active');
-      return false;
-    }
+    //   if ( $('#menu').css('visibility') != 'hidden' && topDistance < 50 ) {
+    //     $("#menu > #nav").show();
+    //   } else if ($('#menu').css('visibility') != 'hidden' && topDistance > 100) {
+    //     $("#menu > #nav").hide();
+    //   }
+    //   return false;
+    // } else {
+    //   $('#menu').css('visibility','hidden');
+    //   $('#menu-icon').removeClass('active');
+    //   return false;
+    // }
   });
 
     /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */

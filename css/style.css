@@ -436,7 +436,7 @@
 }
 html {
   height: 100%;
-  border-top: 2px solid #c9cacc;
+/*border-top: 2px solid $color-text*/
 }
 body {
   color: #c9cacc;
@@ -689,7 +689,10 @@ body {
   color: #2bbc8a;
 }
 #header-post #menu {
-  visibility: hidden;
+  display: none;
+}
+#header-post #menu.open {
+  display: block;
 }
 #header-post #nav {
   letter-spacing: 0.01em;
@@ -779,7 +782,24 @@ body {
 }
 @media screen and (max-width: 1199px) {
   #header-post {
+    z-index: 999;
+    opacity: 0.9;
+/*display: none*/
+    top: 0;
+    right: 0;
+    padding-right: 15px;
+    width: 100%;
+    background: #2bbc8a;
+    color: #fff;
+  }
+  #header-post #menu-icon {
     display: none;
+  }
+  #header-post #nav {
+    color: #fff;
+  }
+  #header-post #nav ul li {
+    border-color: #fff;
   }
 }
 #sociallinks {
