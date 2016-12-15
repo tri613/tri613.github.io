@@ -801,6 +801,9 @@ body {
   #header-post #nav ul li {
     border-color: #fff;
   }
+  #header-post #nav ul li:hover {
+    text-decoration: underline;
+  }
 }
 #sociallinks {
   display: inline-block;

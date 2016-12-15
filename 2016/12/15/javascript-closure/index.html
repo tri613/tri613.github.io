@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Closure一直是我覺得JS裡面很玄的東西，最近又熊熊想到(?)回去好好看它，這篇主要是記錄自己卡點的地方，如果有錯歡迎指正。
+定義Closures are functions that refer to independent (free) variables (variables that are used locally, but defined in an enclosing scope">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript closure">
+<meta property="og:url" content="http://tri613.github.io/2016/12/15/javascript-closure/index.html">
+<meta property="og:site_name" content="Tri's">
+<meta property="og:description" content="Closure一直是我覺得JS裡面很玄的東西，最近又熊熊想到(?)回去好好看它，這篇主要是記錄自己卡點的地方，如果有錯歡迎指正。
+定義Closures are functions that refer to independent (free) variables (variables that are used locally, but defined in an enclosing scope">
+<meta property="og:updated_time" content="2016-12-15T07:07:42.614Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript closure">
+<meta name="twitter:description" content="Closure一直是我覺得JS裡面很玄的東西，最近又熊熊想到(?)回去好好看它，這篇主要是記錄自己卡點的地方，如果有錯歡迎指正。
+定義Closures are functions that refer to independent (free) variables (variables that are used locally, but defined in an enclosing scope">
+    
+    
+    <!-- title -->
+    <title>Javascript closure</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <div id="menu-icon"><i class="fa fa-bars fa-lg"></i></div>
+  <div id="nav">
+    <ul>
+       
+        <li><a href="/">Home</a></li>
+       
+        <li><a href="/archives/">Writing</a></li>
+      
+    </ul>
+  </div>
+  <span id="menu">
+    <br/>
+    <span id="actions">
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+      <ul>
+        
+        
+        <li><a class="icon" href="/2016/11/23/google-login/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+        <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://tri613.github.io/2016/12/15/javascript-closure/"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="https://twitter.com/share?url=http://tri613.github.io/2016/12/15/javascript-closure/&text=Javascript closure"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://tri613.github.io/2016/12/15/javascript-closure/&title=Javascript closure"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tri613.github.io/2016/12/15/javascript-closure/&is_video=false&description=Javascript closure"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="mailto:?subject=Javascript closure&body=Check out this article: http://tri613.github.io/2016/12/15/javascript-closure/"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="https://getpocket.com/save?url=http://tri613.github.io/2016/12/15/javascript-closure/&title=Javascript closure"><i class="fa fa-get-pocket" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="http://reddit.com/submit?url=http://tri613.github.io/2016/12/15/javascript-closure/&title=Javascript closure"><i class="fa fa-reddit" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://tri613.github.io/2016/12/15/javascript-closure/&title=Javascript closure"><i class="fa fa-stumbleupon" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="http://digg.com/submit?url=http://tri613.github.io/2016/12/15/javascript-closure/&title=Javascript closure"><i class="fa fa-digg" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://tri613.github.io/2016/12/15/javascript-closure/&name=Javascript closure&description="><i class="fa fa-tumblr" aria-hidden="true"></i></a></li>
+      </ul>
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#定義"><span class="toc-number">1.</span> <span class="toc-text">定義</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Creating-closures-in-loops-A-common-mistake"><span class="toc-number">2.</span> <span class="toc-text">Creating closures in loops: A common mistake</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Creating-closures-in-loops-Solutions"><span class="toc-number">3.</span> <span class="toc-text">Creating closures in loops: Solutions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#參考資料"><span class="toc-number">4.</span> <span class="toc-text">參考資料</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Javascript closure
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tri's</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2016-12-15T04:50:54.000Z" itemprop="datePublished">2016-12-15</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/javascript/">javascript</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Closure一直是我覺得JS裡面很玄的東西，<br>最近又熊熊想到(?)回去好好看它，<br>這篇主要是記錄自己卡點的地方，如果有錯歡迎指正。</p>
+<h2 id="定義"><a href="#定義" class="headerlink" title="定義"></a>定義</h2><blockquote><p>Closures are functions that refer to independent (free) variables (variables that are used locally, but defined in an enclosing scope). In other words, these functions ‘remember’ the environment in which they were created.</p>
+<footer><strong>Mozilla</strong><cite><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" target="_blank" rel="external">developer.mozilla.org/en-US/docs/Web/JavaScript/Closures</a></cite></footer></blockquote>
+<blockquote><p>Closures can simply be defined as an inner function in JavaScript has the access to all variable define in outer functions.<br>So when a function is invoked in JavaScript , it creates a new execution context. This context has access to Parent objects with the arguments for current function get invoked, this execution context also has access to the variables declared outside of its scope.</p>
+<footer><strong>Programming Concepts Help</strong><cite><a href="http://conceptf1.blogspot.tw/2013/11/javascript-closures.html" target="_blank" rel="external">conceptf1.blogspot.tw/2013/11/javascript-closures.html</a></cite></footer></blockquote>
+<p>考慮以下的例子：</p>
+<iframe scrolling="no" width="100%" height="300" src="http://jsfiddle.net/rLhfxgo7/embedded/js,result/dark" frameborder="0" allowfullscreen></iframe>
+<p><code>greeting</code> 被賦值的時候，會觸發並執行 anonymous function，<br>這個anonymous function則會回傳另一個function。<br>而這個function，也就是閉包，它記住了它的環境上下文，<br>所以它可以取得在它scope之外的變數 <code>me</code>，<br>即使 <code>me</code> 的值被改變，<code>greeting</code>仍然可以取得 <code>me</code> 正確的值。</p>
+<p>這就是一個最簡單的closure。</p>
+<h2 id="Creating-closures-in-loops-A-common-mistake"><a href="#Creating-closures-in-loops-A-common-mistake" class="headerlink" title="Creating closures in loops: A common mistake"></a>Creating closures in loops: A common mistake</h2><p>Mozilla關於Closure的文件上有一段<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures#Creating_closures_in_loops_A_common_mistake" target="_blank" rel="external">Creating closures in loops: A common mistake</a>，<br>裡面的例子我卡了很久才想通：(這邊是直接用Mozilla上面的fiddle)</p>
+<iframe scrolling="no" width="100%" height="300" src="http://jsfiddle.net/v7gjv/embedded/js,html,result/dark" frameborder="0" allowfullscreen></iframe>
+<p>照理來說，我們希望在focus不同input的時候，會出現各自的提示訊息，<br>但這邊卻只會顯示最後一筆 <code>Your age (you must be over 16)</code>。<br>原因是在創建onfocus的callback的時候，它其實是一個closure，<br>所以它記得的是被創建時的<strong>上下文</strong>，<br>也就是說onfocus被觸發的時候，它的callback會知道去哪裡找 <code>item.help</code> 的值，<br>但在for loop完了之後，<code>item.help</code>的值已經變成 <code>Your age (you must be over 16)</code>了，<br>而這也是為什麼上面的範例中，不管選哪個它都只會顯示同一個訊息。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; helpText.length; i++) &#123;</div><div class="line">    <span class="keyword">var</span> item = helpText[i];</div><div class="line">    <span class="built_in">document</span>.getElementById(item.id).onfocus = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      showHelp(item.help); </div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 在for loop外面印出item</span></div><div class="line"><span class="built_in">console</span>.log(item); <span class="comment">// &#123;'id': 'age', 'help': 'Your age (you must be over 16)'&#125;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>所以說Closure基本上就是一個inner function會記得被創建時的外層上下文環境，<br>而這個inner function可以取得parent scope的變數，<br>它知道變數該指向的<code>對象</code>，但並不包含變數當下的<code>值</code>。</p>
+</blockquote>
+<h2 id="Creating-closures-in-loops-Solutions"><a href="#Creating-closures-in-loops-Solutions" class="headerlink" title="Creating closures in loops: Solutions"></a>Creating closures in loops: Solutions</h2><p>解法在 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures#Creating_closures_in_loops_A_common_mistake" target="_blank" rel="external">Mozilla</a> 上面都有提供，這邊稍微再補充那裡面提到的第一種方式。</p>
+<iframe scrolling="no" width="100%" height="300" src="http://jsfiddle.net/v7gjv/1/embedded/js,html,result/dark" frameborder="0" allowfullscreen></iframe>
+<p>根據 Mozilla 的說明，之前 for loop 會出問題，是因為所有的callback function在創建時，<br>全部都指向了同一個環境，所以指向的<code>item</code>都會是同一個，<br>不像上面是各自創了一個獨立環境。</p>
+<p>這個說法對我來說有點抽象，我比較喜歡<a href="http://conceptf1.blogspot.tw/2013/11/javascript-closures.html" target="_blank" rel="external">Programming Concepts Help</a>的解釋：</p>
+<blockquote>
+<p>If we pass a parameter function makes its own local copy of the variable (if it is not object type which pass by reference). So each time function has its own local copy of variable which not get updated by loop iteration.</p>
+</blockquote>
+<p>豁然開朗啊！JS真是博大精深。(謎)</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" target="_blank" rel="external">Mozilla - Closures</a></li>
+<li><a href="http://conceptf1.blogspot.tw/2013/11/javascript-closures.html" target="_blank" rel="external">Programming Concepts Help</a></li>
+</ul>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+    </div>
+
+
+
+      </div>
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2016 Tri&#39;s
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-67482141-4', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'tri613-github-io';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
