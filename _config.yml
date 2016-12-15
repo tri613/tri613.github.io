@@ -71,3 +71,4 @@ deploy:
   type: git
   repo: git@github.com:tri613/tri613.github.io.git
   branch: master
+
