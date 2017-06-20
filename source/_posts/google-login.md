@@ -6,9 +6,10 @@ tags:
 date: 2016-11-23 13:53:46
 ---
 
-
 假設已經在 [Google API Console](https://console.developers.google.com/projectselector/apis/library) 完成專案的建置並取得`Client Id`了，
 有三種方式可以設置Google登入。
+
+<!-- more -->
 
 ## 1. Setup with meta
 

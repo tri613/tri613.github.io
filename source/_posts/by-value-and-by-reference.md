@@ -12,6 +12,9 @@ tags:
 > 而是以變數的值是否`immutable`的差別來區分，
 > 不過我覺得這樣子的分法對我來說比較好理解。
 
+<!-- more -->
+
+
 ## 1. By Value (Copying)
 
 一般來說只要是 strings, numbers 和 booleans，都可以說是 `by value`。

@@ -10,6 +10,8 @@ tags:
 - VM: CentOS 6.5
 - Host: Windows7
 
+<!-- more -->
+
 ## VM 設定
 
 1. 網卡設定
