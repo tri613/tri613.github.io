@@ -1,145 +1,243 @@
 <!DOCTYPE html>
 <html lang=zh>
 <head>
-    <!-- so meta -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
+    
+    <title>css fallback for IE(11+) | Tri&#39;s</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="我也不知道我當初為什麼會硬著頭皮寫英文的，反正就是英文的了哈哈哈
-1. grayscale  12-webkit-filter:grayscale(100%);filter:grayscale(100%);
-
-use javascript. see tutorial here.
-or just simply use picture in gray. (haha)
-
-2. object-fit /">
+    <meta name="description" content="我也不知道我當初為什麼會硬著頭皮寫英文的，反正就是英文的了哈哈哈">
 <meta property="og:type" content="article">
 <meta property="og:title" content="css fallback for IE(11+)">
 <meta property="og:url" content="http://tri613.github.io/2016/11/21/css-fallback-for-ie/index.html">
 <meta property="og:site_name" content="Tri's">
-<meta property="og:description" content="我也不知道我當初為什麼會硬著頭皮寫英文的，反正就是英文的了哈哈哈
-1. grayscale  12-webkit-filter:grayscale(100%);filter:grayscale(100%);
-
-use javascript. see tutorial here.
-or just simply use picture in gray. (haha)
-
-2. object-fit /">
+<meta property="og:description" content="我也不知道我當初為什麼會硬著頭皮寫英文的，反正就是英文的了哈哈哈">
 <meta property="og:image" content="https://i.imgur.com/Xk1cv6S.jpg">
 <meta property="og:image" content="https://i.imgur.com/980k1Fm.jpg">
-<meta property="og:updated_time" content="2016-11-23T03:33:13.918Z">
+<meta property="og:updated_time" content="2017-06-20T05:23:11.850Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="css fallback for IE(11+)">
-<meta name="twitter:description" content="我也不知道我當初為什麼會硬著頭皮寫英文的，反正就是英文的了哈哈哈
-1. grayscale  12-webkit-filter:grayscale(100%);filter:grayscale(100%);
-
-use javascript. see tutorial here.
-or just simply use picture in gray. (haha)
-
-2. object-fit /">
+<meta name="twitter:description" content="我也不知道我當初為什麼會硬著頭皮寫英文的，反正就是英文的了哈哈哈">
 <meta name="twitter:image" content="https://i.imgur.com/Xk1cv6S.jpg">
     
+
     
-    <!-- title -->
-    <title>css fallback for IE(11+)</title>
-    <!-- styles -->
-    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
-    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
     <link rel="stylesheet" href="/css/style.css">
-    <!-- rss -->
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
     
     
-    <!-- jquery -->
-    <script src="/lib/jquery/jquery.min.js"></script>
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
 </head>
 
 <body>
-    
-      <div id="header-post">
-  <div id="menu-icon"><i class="fa fa-bars fa-lg"></i></div>
-  <div id="nav">
-    <ul>
-       
-        <li><a href="/">Home</a></li>
-       
-        <li><a href="/archives/">Writing</a></li>
-      
-    </ul>
-  </div>
-  <span id="menu">
-    <br/>
-    <span id="actions">
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-      <ul>
-        
-        <li><a class="icon" href="/2016/11/21/vm-network-settings/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
-        
-        
-        <li><a class="icon" href="/2016/11/21/nth-child-vs-nth-of-type/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
-        
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
-        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
-      </ul>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-        <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://tri613.github.io/2016/11/21/css-fallback-for-ie/"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-        <li><a class="icon" href="https://twitter.com/share?url=http://tri613.github.io/2016/11/21/css-fallback-for-ie/&text=css fallback for IE(11+)"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-        <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://tri613.github.io/2016/11/21/css-fallback-for-ie/&title=css fallback for IE(11+)"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-        <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tri613.github.io/2016/11/21/css-fallback-for-ie/&is_video=false&description=css fallback for IE(11+)"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-        <li><a class="icon" href="mailto:?subject=css fallback for IE(11+)&body=Check out this article: http://tri613.github.io/2016/11/21/css-fallback-for-ie/"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
-        <li><a class="icon" href="https://getpocket.com/save?url=http://tri613.github.io/2016/11/21/css-fallback-for-ie/&title=css fallback for IE(11+)"><i class="fa fa-get-pocket" aria-hidden="true"></i></a></li>
-        <li><a class="icon" href="http://reddit.com/submit?url=http://tri613.github.io/2016/11/21/css-fallback-for-ie/&title=css fallback for IE(11+)"><i class="fa fa-reddit" aria-hidden="true"></i></a></li>
-        <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://tri613.github.io/2016/11/21/css-fallback-for-ie/&title=css fallback for IE(11+)"><i class="fa fa-stumbleupon" aria-hidden="true"></i></a></li>
-        <li><a class="icon" href="http://digg.com/submit?url=http://tri613.github.io/2016/11/21/css-fallback-for-ie/&title=css fallback for IE(11+)"><i class="fa fa-digg" aria-hidden="true"></i></a></li>
-        <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://tri613.github.io/2016/11/21/css-fallback-for-ie/&name=css fallback for IE(11+)&description="><i class="fa fa-tumblr" aria-hidden="true"></i></a></li>
-      </ul>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                
+                <span class="site-title">Tri&#39;s</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="https://avatars0.githubusercontent.com/u/10163715?v=3&amp;s=400" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
     </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-grayscale"><span class="toc-number">1.</span> <span class="toc-text">1. grayscale</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-object-fit-object-position"><span class="toc-number">2.</span> <span class="toc-text">2. object-fit / object-position</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-vertical-centering-with-css-translate"><span class="toc-number">3.</span> <span class="toc-text">3. vertical centering with css translate</span></a></li></ol>
-    </div>
-  </span>
 </div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: 'Pages',
+            CATEGORIES: '分類',
+            TAGS: '標籤',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
 
-    
-    <div class="content index width mx-auto px2 my4">
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="https://avatars0.githubusercontent.com/u/10163715?v=3&amp;s=400" />
+            <h2 id="name">Trina Lu</h2>
+            <h3 id="title">寫點筆記 &amp; murmur</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Taipei, Taiwan</span>
+            <a id="follow" target="_blank" href="https://github.com/tri613">關注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                10
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                15
+                <span>標籤</span>
+            </div>
+        </div>
         
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/tri613" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://twitter.com/tri613" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.facebook.com/trina.lu.1" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-css-fallback-for-ie" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
     
-    <h1 class="posttitle" itemprop="name headline">
-        css fallback for IE(11+)
-    </h1>
+        <h1 class="article-title" itemprop="name">
+            css fallback for IE(11+)
+        </h1>
+    
 
-
-
-    <div class="meta">
-      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">Tri's</span>
-      </span>
-      
-    <div class="postdate">
-        <time datetime="2016-11-21T08:45:40.000Z" itemprop="datePublished">2016-11-21</time>
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/11/21/css-fallback-for-ie/">
+            <time datetime="2016-11-21T08:45:40.000Z" itemprop="datePublished">2016-11-21</time>
+        </a>
     </div>
 
 
-      
+                        
+                        
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link" href="/tags/css/">css</a>, <a class="tag-link" href="/tags/ie/">ie</a>
     </div>
 
-
-    </div>
-  </header>
-  
-
-  <div class="content" itemprop="articleBody">
-    <p><em>我也不知道我當初為什麼會硬著頭皮寫英文的，反正就是英文的了哈哈哈</em></p>
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p><em>我也不知道我當初為什麼會硬著頭皮寫英文的，反正就是英文的了哈哈哈</em></p>
+<a id="more"></a>
 <h2 id="1-grayscale"><a href="#1-grayscale" class="headerlink" title="1. grayscale"></a>1. grayscale</h2>  <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">-webkit-filter</span><span class="selector-pseudo">:grayscale(100</span>%);</div><div class="line"><span class="selector-tag">filter</span><span class="selector-pseudo">:grayscale(100</span>%);</div></pre></td></tr></table></figure>
 <ul>
 <li>use javascript. see tutorial <a href="http://www.majas-lapu-izstrade.lv/useful/cross-browser-grayscale-image-example-using-css3-js" target="_blank" rel="external">here</a>.</li>
@@ -158,62 +256,283 @@ or just simply use picture in gray. (haha)
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* this works in IE (and all other browsers) */</span></div><div class="line"><span class="selector-class">.page-content</span> &#123;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">bottom</span>: <span class="number">50%</span>; </div><div class="line">    <span class="attribute">right</span>: <span class="number">50%</span>;</div><div class="line">    <span class="attribute">transform</span>: <span class="built_in">translate</span>(50%,50%);</div><div class="line">    <span class="attribute">-webkit-transform</span>: <span class="built_in">translate</span>(50%,50%);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>Guess this is just some kind of bug in IE, since this doesn’t happen in other browsers. Stupid IE.</p>
 
-  </div>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://tri613.github.io/2016/11/21/css-fallback-for-ie/" data-id="cj453yvns00066shgdmc3og52" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://tri613.github.io/2016/11/21/css-fallback-for-ie/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://tri613.github.io/2016/11/21/css-fallback-for-ie/">評論</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/11/21/vm-network-settings/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    Network settings for virtualbox
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2016/11/21/nth-child-vs-nth-of-type/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">:nth-child v.s. :nth-of-type</div>
+        </a>
+    
+</nav>
+
+
+    
 </article>
 
-    <div class="blog-post-comments">
-        <div id="disqus_thread">
-            <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    
+    
+        <section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/06/15/bind-apply-and-call/" class="title">.bind(), .apply() and .call()</a></p>
+                            <p class="item-date"><time datetime="2017-06-15T06:25:31.000Z" itemprop="datePublished">2017-06-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/01/23/by-value-and-by-reference/" class="title">Javascript&#39;s by value and by reference</a></p>
+                            <p class="item-date"><time datetime="2017-01-22T16:26:39.000Z" itemprop="datePublished">2017-01-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/01/12/safari-click-event/" class="title">Click events not working on Safari</a></p>
+                            <p class="item-date"><time datetime="2017-01-12T15:54:29.000Z" itemprop="datePublished">2017-01-12</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/12/15/javascript-closure/" class="title">Javascript closure</a></p>
+                            <p class="item-date"><time datetime="2016-12-15T04:50:54.000Z" itemprop="datePublished">2016-12-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/11/23/google-login/" class="title">Setup Google login</a></p>
+                            <p class="item-date"><time datetime="2016-11-23T05:53:46.000Z" itemprop="datePublished">2016-11-23</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">歸檔</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">6</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">標籤</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apns/">apns</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google/">google</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/i-dont-know-JS/">i-dont-know-JS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ie/">ie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mamp/">mamp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/">network</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/osx/">osx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/push/">push</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/safari/">safari</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/social-login/">social-login</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vm/">vm</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">標籤雲</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/apns/" style="font-size: 10px;">apns</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/google/" style="font-size: 10px;">google</a> <a href="/tags/i-dont-know-JS/" style="font-size: 10px;">i-dont-know-JS</a> <a href="/tags/ie/" style="font-size: 10px;">ie</a> <a href="/tags/ios/" style="font-size: 15px;">ios</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mamp/" style="font-size: 10px;">mamp</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/osx/" style="font-size: 10px;">osx</a> <a href="/tags/push/" style="font-size: 10px;">push</a> <a href="/tags/safari/" style="font-size: 10px;">safari</a> <a href="/tags/social-login/" style="font-size: 10px;">social-login</a> <a href="/tags/vm/" style="font-size: 10px;">vm</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">連結</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
         </div>
     </div>
 
 
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
 
-      </div>
-    <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy; 2017 Tri&#39;s
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/archives/">Writing</a></li>
-        
-      </ul>
-    </nav>
-  </div>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Trina Lu<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
 </footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://tri613.github.io/2016/11/21/css-fallback-for-ie/';
+        
+        this.page.identifier = 'css-fallback-for-ie';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
 
-    <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
 <script src="/js/main.js"></script>
-<!-- Google Analytics -->
 
-    <script type="text/javascript">
-        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-67482141-4', 'auto');
-        ga('send', 'pageview');
-    </script>
-
-<!-- Disqus Comments -->
-
-    <script type="text/javascript">
-        var disqus_shortname = 'tri613-github-io';
-
-        (function(){
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        }());
-    </script>
-
-
+    </div>
 </body>
 </html>
