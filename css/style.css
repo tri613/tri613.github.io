@@ -1339,6 +1339,9 @@ pre code {
   display: block;
   padding: 0;
 }
+pre a.vglink {
+  color: #9e9e9e;
+}
 .highlight {
   font-family: "Menlo", "Meslo LG", monospace;
   background: #302d2a;
