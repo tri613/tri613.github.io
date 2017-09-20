@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="看了一下大家似乎是用nginx + pm2在作這些事情但我覺得多一個pm2就好麻煩喔為什麼要這樣逼大家嗚嗚不曉得如果要弄到ec2上又是怎樣MIS真的不是人在幹的(。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node production server">
+<meta property="og:url" content="http://tri613.github.io/2017/07/20/node-production-server/index.html">
+<meta property="og:site_name" content="Tri's">
+<meta property="og:description" content="看了一下大家似乎是用nginx + pm2在作這些事情但我覺得多一個pm2就好麻煩喔為什麼要這樣逼大家嗚嗚不曉得如果要弄到ec2上又是怎樣MIS真的不是人在幹的(。">
+<meta property="og:updated_time" content="2017-09-20T03:22:22.808Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node production server">
+<meta name="twitter:description" content="看了一下大家似乎是用nginx + pm2在作這些事情但我覺得多一個pm2就好麻煩喔為什麼要這樣逼大家嗚嗚不曉得如果要弄到ec2上又是怎樣MIS真的不是人在幹的(。">
+    
+    
+    <!-- title -->
+    <title>Node production server</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/08/03/node-server-with-docker/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/06/15/bind-apply-and-call/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://tri613.github.io/2017/07/20/node-production-server/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://tri613.github.io/2017/07/20/node-production-server/&text=Node production server"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://tri613.github.io/2017/07/20/node-production-server/&title=Node production server"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tri613.github.io/2017/07/20/node-production-server/&is_video=false&description=Node production server"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Node production server&body=Check out this article: http://tri613.github.io/2017/07/20/node-production-server/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://tri613.github.io/2017/07/20/node-production-server/&title=Node production server"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://tri613.github.io/2017/07/20/node-production-server/&title=Node production server"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://tri613.github.io/2017/07/20/node-production-server/&title=Node production server"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://tri613.github.io/2017/07/20/node-production-server/&title=Node production server"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://tri613.github.io/2017/07/20/node-production-server/&name=Node production server&description=&lt;p&gt;看了一下大家似乎是用nginx + pm2在作這些事情&lt;br&gt;但我覺得多一個pm2就好麻煩喔為什麼要這樣逼大家嗚嗚&lt;br&gt;不曉得如果要弄到ec2上又是怎樣&lt;br&gt;MIS真的不是人在幹的(。&lt;/p&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#環境"><span class="toc-number">1.</span> <span class="toc-text">環境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安裝各種東西"><span class="toc-number">1.1.</span> <span class="toc-text">安裝各種東西</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#設定網路-amp-安裝-openssh-server"><span class="toc-number">1.1.1.</span> <span class="toc-text">設定網路 & 安裝 openssh server</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安裝-node"><span class="toc-number">1.1.2.</span> <span class="toc-text">安裝 node</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安裝-nginx"><span class="toc-number">1.1.3.</span> <span class="toc-text">安裝 nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安裝-pm2"><span class="toc-number">1.1.4.</span> <span class="toc-text">安裝 pm2</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#設定-nginx"><span class="toc-number">2.</span> <span class="toc-text">設定 nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SSL"><span class="toc-number">2.1.</span> <span class="toc-text">SSL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP判斷"><span class="toc-number">2.2.</span> <span class="toc-text">IP判斷</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#架-node-server"><span class="toc-number">3.</span> <span class="toc-text">架 node server</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#備註"><span class="toc-number">3.1.</span> <span class="toc-text">備註</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-pm2-啟動-node-server"><span class="toc-number">4.</span> <span class="toc-text">使用 pm2 啟動 node server</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#寫-pm2-設定檔"><span class="toc-number">4.1.</span> <span class="toc-text">寫 pm2 設定檔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#啟動"><span class="toc-number">4.2.</span> <span class="toc-text">啟動</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#開機時自動啟動pm2程序"><span class="toc-number">4.3.</span> <span class="toc-text">開機時自動啟動pm2程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他"><span class="toc-number">4.4.</span> <span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SO-Why-nginx"><span class="toc-number">5.</span> <span class="toc-text">SO? Why nginx?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#參考資料"><span class="toc-number">6.</span> <span class="toc-text">參考資料</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Node production server
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tri's</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-07-20T03:17:13.000Z" itemprop="datePublished">2017-07-20</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/linux/">linux</a>, <a class="tag-link" href="/tags/nginx/">nginx</a>, <a class="tag-link" href="/tags/node-js/">node.js</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>看了一下大家似乎是用nginx + pm2在作這些事情<br>但我覺得多一個pm2就好麻煩喔為什麼要這樣逼大家嗚嗚<br>不曉得如果要弄到ec2上又是怎樣<br>MIS真的不是人在幹的(。</p>
+<a id="more"></a>
+<h2 id="環境"><a href="#環境" class="headerlink" title="環境"></a>環境</h2><ul>
+<li>Ubuntu 16.04</li>
+<li>node v7.10.1</li>
+<li>npm v4.2.0</li>
+</ul>
+<h3 id="安裝各種東西"><a href="#安裝各種東西" class="headerlink" title="安裝各種東西"></a>安裝各種東西</h3><h4 id="設定網路-amp-安裝-openssh-server"><a href="#設定網路-amp-安裝-openssh-server" class="headerlink" title="設定網路 &amp; 安裝 openssh server"></a>設定網路 &amp; 安裝 openssh server</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt install openssh-server</div></pre></td></tr></table></figure>
+<ul>
+<li>沒有CURL的話<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update; sudo apt-get install curl</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="安裝-node"><a href="#安裝-node" class="headerlink" title="安裝 node"></a>安裝 node</h4><ul>
+<li>推薦方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># Install Node.js 7.x repository</div><div class="line">curl -sL https://deb.nodesource.com/setup_7.x | bash -</div><div class="line"></div><div class="line"># Install Node.js and npm</div><div class="line">apt-get install -y nodejs</div></pre></td></tr></table></figure>
+<ul>
+<li>用nvm (buggy)</li>
+</ul>
+<p>會buggy的原因是nvm都灌在使用者自己的根目錄下面<br>如果到別的地方要用or sudo就會怪怪的<br>但我不想修這種bug所以果斷放棄^^</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ apt-get update</div><div class="line">$ curl https://raw.githubusercontent.com/creationix/nvm/v0.25.0/install.sh | bash</div></pre></td></tr></table></figure>
+<p>如果出現 <code>Close and reopen your terminal to start using nvm</code><br>不想重開可以打下面的指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ source ~/.profile</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ nvm install 7</div></pre></td></tr></table></figure>
+<h4 id="安裝-nginx"><a href="#安裝-nginx" class="headerlink" title="安裝 nginx"></a>安裝 nginx</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install nginx</div></pre></td></tr></table></figure>
+<h4 id="安裝-pm2"><a href="#安裝-pm2" class="headerlink" title="安裝 pm2"></a>安裝 pm2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo npm install -g pm2</div></pre></td></tr></table></figure>
+<h2 id="設定-nginx"><a href="#設定-nginx" class="headerlink" title="設定 nginx"></a>設定 nginx</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo vim /etc/nginx/sites-available/default</div></pre></td></tr></table></figure>
+<p>寫成像下面這樣</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen <span class="number">80</span>;</div><div class="line">    return <span class="number">301</span> https://$host$request_uri;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen <span class="number">443</span>;</div><div class="line">    server_name tri.example.com;</div><div class="line"></div><div class="line">    ssl_certificate           /etc/nginx/cert.crt;</div><div class="line">    ssl_certificate_key       /etc/nginx/cert.key;</div><div class="line"></div><div class="line">    ssl on;</div><div class="line">    ssl_session_cache  builtin:<span class="number">1000</span>  shared:SSL:<span class="number">10</span>m;</div><div class="line">    ssl_protocols  TLSv1 TLSv1<span class="number">.1</span> TLSv1<span class="number">.2</span>;</div><div class="line">    ssl_ciphers HIGH:!aNULL:!eNULL:!EXPORT:!CAMELLIA:!DES:!MD5:!PSK:!RC4;</div><div class="line">    ssl_prefer_server_ciphers on;</div><div class="line"></div><div class="line">    access_log            /var/log/nginx/example.access.log;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">      proxy_pass          http://localhost:<span class="number">8080</span>;</div><div class="line">      <span class="comment"># proxy_read_timeout  90;</span></div><div class="line">      proxy_http_version <span class="number">1.1</span>;</div><div class="line"></div><div class="line">      proxy_set_header        Host $host;</div><div class="line">      proxy_set_header        X-Real-IP $remote_addr;</div><div class="line">      proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="line">      proxy_set_header        X-Forwarded-Proto $scheme;</div><div class="line"></div><div class="line">      proxy_set_header Upgrade $http_upgrade;</div><div class="line">      proxy_set_header Connection <span class="string">'upgrade'</span>;</div><div class="line">      proxy_set_header Host $host;</div><div class="line">      proxy_cache_bypass $http_upgrade;</div><div class="line"></div><div class="line">      proxy_redirect      http://localhost:<span class="number">8080</span> https://tri.example.com;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>設定完記得重啟一下就行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo service nginx restart</div></pre></td></tr></table></figure>
+<h3 id="SSL"><a href="#SSL" class="headerlink" title="SSL"></a>SSL</h3><p>上面那個有設定ssl，憑證開發用的可以自簽<br>雖然瀏覽器會說你這個是可怕的網站但沒關係<br>Production再換成正式憑證就好<br>自簽憑證：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/cert.key -out /etc/nginx/cert.crt</div></pre></td></tr></table></figure></p>
+<p>參考資料：<a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-16-04" target="_blank" rel="external">https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-16-04</a></p>
+<h3 id="IP判斷"><a href="#IP判斷" class="headerlink" title="IP判斷"></a>IP判斷</h3><p>在 Server block裡面簡單加上<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">allow 192.168.13.13</div><div class="line">deny all</div></pre></td></tr></table></figure></p>
+<p>之類的就可以了。</p>
+<p>但如果有load balance什麼東西等等，就要透過 <code>ngx_http_realip_module</code> 來獲取client真實IP，<br>這我沒設過但下面有兩篇蠻清楚的講解文，下次再試。</p>
+<ul>
+<li><a href="https://leo108.com/pid-2132.asp" target="_blank" rel="external">https://leo108.com/pid-2132.asp</a></li>
+<li><a href="https://www.x4b.net/kb/RealIP-Nginx" target="_blank" rel="external">https://www.x4b.net/kb/RealIP-Nginx</a></li>
+</ul>
+<h2 id="架-node-server"><a href="#架-node-server" class="headerlink" title="架 node server"></a>架 node server</h2><p>我都放在 <code>/var/www/</code> 下面，這邊就只是把code clone下來放著(?)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd /var/www</div><div class="line">$ sudo git clone https://some-git-repository.git myproject</div></pre></td></tr></table></figure>
+<h3 id="備註"><a href="#備註" class="headerlink" title="備註"></a>備註</h3><p>Nginx 基本上就是真正對外的server，<br>所以為了不讓外面的人有辦法直接連到node server，<br>可以把 node server綁在一個IP上 (像是localhost)</p>
+<p>express範例如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.listen(port, <span class="string">'127.0.0.1'</span>, () =&gt; <span class="built_in">console</span>.log(<span class="string">`Express server is listening on *:<span class="subst">$&#123;port&#125;</span>`</span>));</div></pre></td></tr></table></figure>
+<p>這樣外面的人就無法透過IP直接連到node server了。<br>(也有人說你就直接設防火牆就好了ㄚ)</p>
+<h2 id="使用-pm2-啟動-node-server"><a href="#使用-pm2-啟動-node-server" class="headerlink" title="使用 pm2 啟動 node server"></a>使用 pm2 啟動 node server</h2><p>現在有了node server的程式碼，就只差把它啟動而已<br>雖然我也很想直接 <code>node index.js</code> 就好<br>但如果它突然中斷我會很害怕<br>所以只好靠 <code>pm2</code> 來幫忙</p>
+<h3 id="寫-pm2-設定檔"><a href="#寫-pm2-設定檔" class="headerlink" title="寫 pm2 設定檔"></a>寫 pm2 設定檔</h3><p>因為我有用到 <code>NODE_ENV</code> 去區分我要連線的DB，<br>所以寫一個config檔放在專案的根目錄裡</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// pm2.config.js</span></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">  <span class="attr">apps</span> : [</div><div class="line">      &#123;</div><div class="line">        <span class="attr">name</span>: <span class="string">"push-usagi"</span>,</div><div class="line">        <span class="attr">script</span>: <span class="string">"./index.js"</span>,</div><div class="line">        <span class="attr">watch</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">ignore_watch</span>: [<span class="string">"node_modules"</span>],</div><div class="line">        <span class="attr">env</span>: &#123;</div><div class="line">            <span class="string">"NODE_ENV"</span>: <span class="string">"development"</span></div><div class="line">        &#125;,</div><div class="line">        <span class="attr">env_testing</span>: &#123;</div><div class="line">            <span class="string">"NODE_ENV"</span>: <span class="string">"testing"</span></div><div class="line">        &#125;,</div><div class="line">        <span class="attr">env_production</span>: &#123;</div><div class="line">            <span class="string">"NODE_ENV"</span>: <span class="string">"production"</span></div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">  ]</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="啟動"><a href="#啟動" class="headerlink" title="啟動"></a>啟動</h3><p>因為我有寫config檔，所以就用config檔來作為啟動設定(?)</p>
+<p>先切到專案目錄下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cd /var/www/myproject</div></pre></td></tr></table></figure>
+<p>然後執行pm2啟動 node server</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pm2 start pm2.config.js --env production</div></pre></td></tr></table></figure>
+<p>看一下它的狀態</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pm2 ls</div></pre></td></tr></table></figure>
+<p>好了，它開起來了。<br>現在它如果意外被關閉會自己重啟，<br>而因為有設定 <code>watch</code>的選項，<br>更新程式的時候它會自己reload server。</p>
+<h3 id="開機時自動啟動pm2程序"><a href="#開機時自動啟動pm2程序" class="headerlink" title="開機時自動啟動pm2程序"></a>開機時自動啟動pm2程序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pm2 startup systemd</div></pre></td></tr></table></figure>
+<p>這一步都是已經把我要自動開的service開起來後才作的，<br>照我的理解是，如果作這步的時候沒有service<br>之後開完要再輸入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pm2 save</div></pre></td></tr></table></figure>
+<p>才可以，但我沒有試成功過就是了。</p>
+<p>上面做完如果重開VM不用作任何事情就可以連到網頁就大功告成啦。:v: </p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>pm2還有支援一些deploy &amp; load balance等等的機制，<br>但這對我來說太over了所以暫時就這樣吧<br>有需要可以翻翻他們的github<br><a href="https://github.com/Unitech/pm2" target="_blank" rel="external">pm2 on github</a></p>
+<h2 id="SO-Why-nginx"><a href="#SO-Why-nginx" class="headerlink" title="SO? Why nginx?"></a>SO? Why nginx?</h2><blockquote>
+<p><del>都裝完了才在問</del> (。</p>
+</blockquote>
+<p>看起來nginx在以下項目上的表現會比直接用node server好，或者是寫node處理會太繁瑣：</p>
+<ul>
+<li>serve static files</li>
+<li>gzip</li>
+<li>load balance (across machine or port的那種，不是node本身的cluster，而是真的開很多node server的load balance)</li>
+<li>同一台server要架很多站 (virtual host)</li>
+<li>綁 80 or 443 port (主要是權限問題，如果可以sudo執行好像就沒差)</li>
+<li>SSL <del>(但node本身也可以設SSL，大家是說這樣比較不好，但到底哪裡不好也沒特別提囧)</del><ul>
+<li>關於SSL這邊有提到是效率問題：<a href="https://www.quora.com/Does-your-Node-js-code-need-a-web-server-to-run" target="_blank" rel="external">Does your Node.js code need a web server to run?</a></li>
+</ul>
+</li>
+<li>a more proper error handling (至少當你node server crash的時候大家連進來還會有 502 bad gateway)</li>
+<li>減少application server (like node, python…) 本身的loading</li>
+</ul>
+<p>所以說不是不能直接裸開node server，只是使用nginx來處理某些事情會更輕鬆可靠，大家才會建議這麼做吧。</p>
+<p>(那我的API server到底有沒有必要呢…感覺除了SSL好像都沒差…)</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04" target="_blank" rel="external">How To Set Up a Node.js Application for Production on Ubuntu 16.04</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-use-pm2-to-setup-a-node-js-production-environment-on-an-ubuntu-vps" target="_blank" rel="external">How To Use PM2 to Setup a Node.js Production Environment On An Ubuntu VPS</a></li>
+<li><a href="https://blog.gtwang.org/linux/nginx-create-and-install-ssl-certificate-on-ubuntu-linux/" target="_blank" rel="external">NGINX 設定 HTTPS 網頁加密連線，建立自行簽署的 SSL 憑證</a></li>
+<li><a href="https://www.nginx.com/blog/5-performance-tips-for-node-js-applications" target="_blank" rel="external">5 Performance Tips for Node.js Applications</a></li>
+<li><a href="https://stackoverflow.com/questions/20210495/deploying-django-in-a-production-server" target="_blank" rel="external">Deploying django in a production server</a></li>
+</ul>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+    </div>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#環境"><span class="toc-number">1.</span> <span class="toc-text">環境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安裝各種東西"><span class="toc-number">1.1.</span> <span class="toc-text">安裝各種東西</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#設定網路-amp-安裝-openssh-server"><span class="toc-number">1.1.1.</span> <span class="toc-text">設定網路 & 安裝 openssh server</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安裝-node"><span class="toc-number">1.1.2.</span> <span class="toc-text">安裝 node</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安裝-nginx"><span class="toc-number">1.1.3.</span> <span class="toc-text">安裝 nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安裝-pm2"><span class="toc-number">1.1.4.</span> <span class="toc-text">安裝 pm2</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#設定-nginx"><span class="toc-number">2.</span> <span class="toc-text">設定 nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SSL"><span class="toc-number">2.1.</span> <span class="toc-text">SSL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP判斷"><span class="toc-number">2.2.</span> <span class="toc-text">IP判斷</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#架-node-server"><span class="toc-number">3.</span> <span class="toc-text">架 node server</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#備註"><span class="toc-number">3.1.</span> <span class="toc-text">備註</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-pm2-啟動-node-server"><span class="toc-number">4.</span> <span class="toc-text">使用 pm2 啟動 node server</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#寫-pm2-設定檔"><span class="toc-number">4.1.</span> <span class="toc-text">寫 pm2 設定檔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#啟動"><span class="toc-number">4.2.</span> <span class="toc-text">啟動</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#開機時自動啟動pm2程序"><span class="toc-number">4.3.</span> <span class="toc-text">開機時自動啟動pm2程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他"><span class="toc-number">4.4.</span> <span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SO-Why-nginx"><span class="toc-number">5.</span> <span class="toc-text">SO? Why nginx?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#參考資料"><span class="toc-number">6.</span> <span class="toc-text">參考資料</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://tri613.github.io/2017/07/20/node-production-server/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://tri613.github.io/2017/07/20/node-production-server/&text=Node production server"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://tri613.github.io/2017/07/20/node-production-server/&title=Node production server"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tri613.github.io/2017/07/20/node-production-server/&is_video=false&description=Node production server"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Node production server&body=Check out this article: http://tri613.github.io/2017/07/20/node-production-server/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://tri613.github.io/2017/07/20/node-production-server/&title=Node production server"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://tri613.github.io/2017/07/20/node-production-server/&title=Node production server"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://tri613.github.io/2017/07/20/node-production-server/&title=Node production server"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://tri613.github.io/2017/07/20/node-production-server/&title=Node production server"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://tri613.github.io/2017/07/20/node-production-server/&name=Node production server&description=&lt;p&gt;看了一下大家似乎是用nginx + pm2在作這些事情&lt;br&gt;但我覺得多一個pm2就好麻煩喔為什麼要這樣逼大家嗚嗚&lt;br&gt;不曉得如果要弄到ec2上又是怎樣&lt;br&gt;MIS真的不是人在幹的(。&lt;/p&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 Trina Lu
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-67482141-4', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'tri613-github-io';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

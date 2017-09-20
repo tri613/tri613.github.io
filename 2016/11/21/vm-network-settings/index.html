@@ -6,18 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="VM: CentOS 6.5
+    <meta name="description" content="※ 2017/09/20 更新 Ubuntu 16.04
+
+VM: CentOS 6.5 / Ubuntu 16.04
 Host: Windows7">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Network settings for virtualbox">
 <meta property="og:url" content="http://tri613.github.io/2016/11/21/vm-network-settings/index.html">
 <meta property="og:site_name" content="Tri's">
-<meta property="og:description" content="VM: CentOS 6.5
+<meta property="og:description" content="※ 2017/09/20 更新 Ubuntu 16.04
+
+VM: CentOS 6.5 / Ubuntu 16.04
 Host: Windows7">
-<meta property="og:updated_time" content="2017-06-20T05:20:23.949Z">
+<meta property="og:updated_time" content="2017-09-20T03:16:10.622Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Network settings for virtualbox">
-<meta name="twitter:description" content="VM: CentOS 6.5
+<meta name="twitter:description" content="※ 2017/09/20 更新 Ubuntu 16.04
+
+VM: CentOS 6.5 / Ubuntu 16.04
 Host: Windows7">
     
     
@@ -75,15 +81,16 @@ Host: Windows7">
   <li><a class="icon" href="http://reddit.com/submit?url=http://tri613.github.io/2016/11/21/vm-network-settings/&title=Network settings for virtualbox"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://tri613.github.io/2016/11/21/vm-network-settings/&title=Network settings for virtualbox"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=http://tri613.github.io/2016/11/21/vm-network-settings/&title=Network settings for virtualbox"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://tri613.github.io/2016/11/21/vm-network-settings/&name=Network settings for virtualbox&description=&lt;ul&gt;
-&lt;li&gt;VM: CentOS 6.5&lt;/li&gt;
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://tri613.github.io/2016/11/21/vm-network-settings/&name=Network settings for virtualbox&description=&lt;p&gt;&lt;em&gt;※ 2017/09/20 更新 Ubuntu 16.04&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;VM: CentOS 6.5 / Ubuntu 16.04&lt;/li&gt;
 &lt;li&gt;Host: Windows7&lt;/li&gt;
 &lt;/ul&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#VM-設定"><span class="toc-number">1.</span> <span class="toc-text">VM 設定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本機設定"><span class="toc-number">2.</span> <span class="toc-text">本機設定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他設定"><span class="toc-number">3.</span> <span class="toc-text">其他設定</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#VM-設定"><span class="toc-number">1.</span> <span class="toc-text">VM 設定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOS-6-5"><span class="toc-number">1.1.</span> <span class="toc-text">CentOS 6.5</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#其他設定"><span class="toc-number">1.1.1.</span> <span class="toc-text">其他設定</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ubuntu-16-04"><span class="toc-number">1.2.</span> <span class="toc-text">Ubuntu 16.04</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本機設定"><span class="toc-number">2.</span> <span class="toc-text">本機設定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#備註"><span class="toc-number">3.</span> <span class="toc-text">備註</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bridged-Networking"><span class="toc-number">3.1.</span> <span class="toc-text">Bridged Networking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Host-Only-Networking"><span class="toc-number">3.2.</span> <span class="toc-text">Host-Only Networking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Network-Address-Translation-NAT"><span class="toc-number">3.3.</span> <span class="toc-text">Network Address Translation (NAT)</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -122,18 +129,20 @@ Host: Windows7">
   
 
   <div class="content" itemprop="articleBody">
-    <ul>
-<li>VM: CentOS 6.5</li>
+    <p><em>※ 2017/09/20 更新 Ubuntu 16.04</em></p>
+<ul>
+<li>VM: CentOS 6.5 / Ubuntu 16.04</li>
 <li>Host: Windows7</li>
 </ul>
 <a id="more"></a>
-<h2 id="VM-設定"><a href="#VM-設定" class="headerlink" title="VM 設定"></a>VM 設定</h2><ol>
-<li><p>網卡設定</p>
-<ul>
+<h2 id="VM-設定"><a href="#VM-設定" class="headerlink" title="VM 設定"></a>VM 設定</h2><ul>
+<li>網卡設定<ul>
 <li>第一張設 <strong>NAT</strong></li>
 <li>第二張設 <strong>橋接介面卡</strong></li>
 </ul>
 </li>
+</ul>
+<h3 id="CentOS-6-5"><a href="#CentOS-6-5" class="headerlink" title="CentOS 6.5"></a>CentOS 6.5</h3><ol>
 <li><p>確認 VM 網卡設定 </p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ifconfig</div></pre></td></tr></table></figure>
 <ul>
@@ -142,6 +151,8 @@ Host: Windows7">
 </li>
 </ul>
 </li>
+</ol>
+<ol>
 <li><p>VM網卡設定</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ vim /etc/sysconfig/network-scripts/ifcfg-&#123;eth0|eth1&#125;</div></pre></td></tr></table></figure>
 <ul>
@@ -152,17 +163,42 @@ Host: Windows7">
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">DEVICE=eth1</div><div class="line">#BOOTPROTO=none</div><div class="line">#BROADCAST=192.168.XXX.255</div><div class="line">HWADDR=08:00:27:79:90:9d #your mac address</div><div class="line">IPADDR=192.168.XXX.VVV</div><div class="line">NETMASK=255.255.255.0</div><div class="line">#NETWORK=192.168.XXX.0</div><div class="line">ONBOOT=yes</div><div class="line">#GATEWAY=192.168.XXX.1</div><div class="line">TYPE=Ethernet</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<ul>
-<li>設定完記得重啟<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ /etc/init.d/network restart</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>檢查連線</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ping 8.8.8.8</div></pre></td></tr></table></figure>
 </li>
 </ol>
+<ol>
+<li><p>設定完記得重啟</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ /etc/init.d/network restart</div></pre></td></tr></table></figure>
+</li>
+<li><p>檢查連線 &amp; you’re good to go!</p>
+</li>
+</ol>
+<h4 id="其他設定"><a href="#其他設定" class="headerlink" title="其他設定"></a>其他設定</h4><ul>
+<li>關閉防火牆</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ service iptables stop</div></pre></td></tr></table></figure>
+<ul>
+<li>設定開機時不會開起防火牆</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ chkconfig iptables off</div></pre></td></tr></table></figure>
+<h3 id="Ubuntu-16-04"><a href="#Ubuntu-16-04" class="headerlink" title="Ubuntu 16.04"></a>Ubuntu 16.04</h3><ol>
+<li>先確認有哪些網卡</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ip addr</div></pre></td></tr></table></figure>
+<ol>
+<li>進入 <code>/etc/network/interfaces</code> 修改檔案</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo vim /etc/network/interfaces</div></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># This file describes the network interfaces available on your system</span></div><div class="line"><span class="comment"># and how to activate them. For more information, see interfaces(5).</span></div><div class="line"></div><div class="line">source /etc/network/interfaces.d/*</div><div class="line"></div><div class="line"><span class="comment"># The loopback network interface</span></div><div class="line">auto lo</div><div class="line">iface lo inet loopback</div><div class="line"></div><div class="line"><span class="comment"># The primary network interface</span></div><div class="line">auto enp0s3</div><div class="line">iface enp0s3 inet dhcp</div><div class="line"></div><div class="line"><span class="comment"># 以下為 橋接網卡 主要新增的部分 (上面都是預設的，不用改)</span></div><div class="line">auto enp0s8</div><div class="line">iface enp0s8 inet static</div><div class="line">address <span class="number">192.168</span><span class="number">.13</span><span class="number">.14</span></div><div class="line">netmask <span class="number">255.255</span><span class="number">.255</span><span class="number">.0</span></div></pre></td></tr></table></figure>
+<ol>
+<li>重啟連線</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo /etc/init.d/networking restart</div></pre></td></tr></table></figure>
+<ol>
+<li>Check and done!</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ping 8.8.8.8</div></pre></td></tr></table></figure>
 <h2 id="本機設定"><a href="#本機設定" class="headerlink" title="本機設定"></a>本機設定</h2><ol>
-<li><p>確定有加網路區段</p>
+<li><p>確定有加網路區段 (Windows)</p>
 <blockquote>
 <p>區域連線 &gt; IPv4 &gt; 進階 &gt; IP設定</p>
 </blockquote>
@@ -172,13 +208,17 @@ Host: Windows7">
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ping 192.168.XXX.VVV</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2 id="其他設定"><a href="#其他設定" class="headerlink" title="其他設定"></a>其他設定</h2><ul>
-<li><p>關閉防火牆</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ service iptables stop</div></pre></td></tr></table></figure>
-</li>
-<li><p>設定開機時不會開起防火牆</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ chkconfig iptables off</div></pre></td></tr></table></figure></li>
-</ul>
+<h2 id="備註"><a href="#備註" class="headerlink" title="備註"></a>備註</h2><p>（以下筆記）</p>
+<p>VMware Player 的 host OS 和 guest OS 之間有三種網路型態：</p>
+<h3 id="Bridged-Networking"><a href="#Bridged-Networking" class="headerlink" title="Bridged Networking"></a>Bridged Networking</h3><p>在這種網路型態之下，guest OS 是透過一個 virtual bridge 和 host OS 所在的 Ethernet 相連，請參考 VMware 的官方 <a href="https://www.vmware.com/support/ws5/doc/ws_net_configurations_bridged.html" target="_blank" rel="external">示意圖</a>。</p>
+<p>對 於與 host OS 同在一個 Ethernet 上的機器來說，guest OS 和 host OS 是兩台獨立的電腦，都可以透過同一個 Ethernet 介面連接，並無法分辨出這兩個 OS 其實是在同一台機器上執行。甚至當 Ethernet 連線出問題時，guest OS 和 host OS 也不能互通 (即使是在同一台機器之內)。</p>
+<p>換句話說，當你把接到 host OS 的網路線拔掉時，這兩個 OS 就無法溝通。因此，想把 VMware Player 灌在 notebook 上帶著跑的人，這種網路型態是不太合適的。</p>
+<h3 id="Host-Only-Networking"><a href="#Host-Only-Networking" class="headerlink" title="Host-Only Networking"></a>Host-Only Networking</h3><p>在 這種網路型態之下，guest OS 和 host OS 是在一個與世隔絕的虛擬網路上。此虛擬網路有一個 DHCP server，可以分配 IP address 給 guest OS 和 host OS (分配給一個虛擬的介面)。因此，guest OS 和 host OS 可以互通。請參考 VMware 的官方<a href="https://www.vmware.com/support/ws5/doc/ws_net_configurations_hostonly.html" target="_blank" rel="external">示意圖</a>。</p>
+<p>對 於與 host OS 同在一個 Ethernet 上的機器來說，guest OS 是看不見的。guest OS 對外聯繫的唯一管道就是 host OS。因此，guest OS 若想連上外部網路或 Internet，就必須在 host OS 安裝 routing 或 NAT 的服務。</p>
+<p>這種架構不會受到實體網路的影響，即使把網路線拔掉，host OS 和 guest OS 還是可以互通。</p>
+<h3 id="Network-Address-Translation-NAT"><a href="#Network-Address-Translation-NAT" class="headerlink" title="Network Address Translation (NAT)"></a>Network Address Translation (NAT)</h3><p>此種網路型態與 host-only networking 的架構很像，但是在虛擬網路上多了一台 NAT router。請參考 VMware 的官方<a href="https://www.vmware.com/support/ws5/doc/ws_net_configurations_nat.html" target="_blank" rel="external">示意圖</a>。</p>
+<p>因為有了這台虛擬的 NAT router，guest 雖然與外界隔離，但仍然可以很方便地透過連接在 host OS 的網路連接 Internet。</p>
+<p>這種架構也不會受到實體網路的影響，即使把網路線拔掉，host OS 和 guest OS 還是可以互通。若連接到 host OS 的 Internet 連線沒有問題，guest OS 也一樣可以連接到 Internet。</p>
 
   </div>
 </article>
@@ -207,7 +247,7 @@ Host: Windows7">
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#VM-設定"><span class="toc-number">1.</span> <span class="toc-text">VM 設定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本機設定"><span class="toc-number">2.</span> <span class="toc-text">本機設定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他設定"><span class="toc-number">3.</span> <span class="toc-text">其他設定</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#VM-設定"><span class="toc-number">1.</span> <span class="toc-text">VM 設定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOS-6-5"><span class="toc-number">1.1.</span> <span class="toc-text">CentOS 6.5</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#其他設定"><span class="toc-number">1.1.1.</span> <span class="toc-text">其他設定</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ubuntu-16-04"><span class="toc-number">1.2.</span> <span class="toc-text">Ubuntu 16.04</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本機設定"><span class="toc-number">2.</span> <span class="toc-text">本機設定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#備註"><span class="toc-number">3.</span> <span class="toc-text">備註</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bridged-Networking"><span class="toc-number">3.1.</span> <span class="toc-text">Bridged Networking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Host-Only-Networking"><span class="toc-number">3.2.</span> <span class="toc-text">Host-Only Networking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Network-Address-Translation-NAT"><span class="toc-number">3.3.</span> <span class="toc-text">Network Address Translation (NAT)</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -221,8 +261,9 @@ Host: Windows7">
   <li><a class="icon" href="http://reddit.com/submit?url=http://tri613.github.io/2016/11/21/vm-network-settings/&title=Network settings for virtualbox"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://tri613.github.io/2016/11/21/vm-network-settings/&title=Network settings for virtualbox"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=http://tri613.github.io/2016/11/21/vm-network-settings/&title=Network settings for virtualbox"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://tri613.github.io/2016/11/21/vm-network-settings/&name=Network settings for virtualbox&description=&lt;ul&gt;
-&lt;li&gt;VM: CentOS 6.5&lt;/li&gt;
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://tri613.github.io/2016/11/21/vm-network-settings/&name=Network settings for virtualbox&description=&lt;p&gt;&lt;em&gt;※ 2017/09/20 更新 Ubuntu 16.04&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;VM: CentOS 6.5 / Ubuntu 16.04&lt;/li&gt;
 &lt;li&gt;Host: Windows7&lt;/li&gt;
 &lt;/ul&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
