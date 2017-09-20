@@ -1,0 +1,35 @@
+nav:
+  Home: /
+  # About: /about/
+  Writing: /archives/
+
+projects_url: http://github.com/tri613
+
+customize:
+    logo:
+        enabled: true
+        width: 50
+        height: 50
+        url: /images/logo.png
+        favicon: /images/favicon.png # path to favicon
+    social_links:
+        github: http://github.com/tri613
+        twitter: https://twitter.com/tri613
+        facebook: https://www.facebook.com/trina.lu.1
+    post_count: 5
+    highlight: rainbow
+
+# RSS
+rss: false
+
+# Plugins
+plugins:
+    disqus_shortname: tri613-github-io
+    google_analytics: UA-67482141-4 # enter the tracking ID for your Google Analytics
+
+# Miscellaneous
+miscellaneous:
+    open_graph: # see http://ogp.me
+        fb_app_id:
+        fb_admins:
+        twitter_id:
