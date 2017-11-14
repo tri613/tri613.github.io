@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="紀錄幾個常見的 JS Promises!">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript Promises">
+<meta property="og:url" content="http://tri613.github.io/2017/11/14/promises/index.html">
+<meta property="og:site_name" content="Tri's">
+<meta property="og:description" content="紀錄幾個常見的 JS Promises!">
+<meta property="og:updated_time" content="2017-11-14T05:52:57.269Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript Promises">
+<meta name="twitter:description" content="紀錄幾個常見的 JS Promises!">
+    
+    
+    <!-- title -->
+    <title>Javascript Promises</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2017/08/03/node-server-with-docker/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://tri613.github.io/2017/11/14/promises/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://tri613.github.io/2017/11/14/promises/&text=Javascript Promises"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://tri613.github.io/2017/11/14/promises/&title=Javascript Promises"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tri613.github.io/2017/11/14/promises/&is_video=false&description=Javascript Promises"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Javascript Promises&body=Check out this article: http://tri613.github.io/2017/11/14/promises/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://tri613.github.io/2017/11/14/promises/&title=Javascript Promises"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://tri613.github.io/2017/11/14/promises/&title=Javascript Promises"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://tri613.github.io/2017/11/14/promises/&title=Javascript Promises"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://tri613.github.io/2017/11/14/promises/&title=Javascript Promises"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://tri613.github.io/2017/11/14/promises/&name=Javascript Promises&description=&lt;p&gt;紀錄幾個常見的 JS Promises!&lt;/p&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise-all"><span class="toc-number">1.</span> <span class="toc-text">Promise.all</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#async-await"><span class="toc-number">2.</span> <span class="toc-text">async / await</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#多個-await"><span class="toc-number">2.1.</span> <span class="toc-text">多個 await</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多個-await-but-先跑-promise"><span class="toc-number">2.2.</span> <span class="toc-text">多個 await but 先跑 promise</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chaining"><span class="toc-number">3.</span> <span class="toc-text">Chaining</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Javascript Promises
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tri's</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-11-14T05:44:24.000Z" itemprop="datePublished">2017-11-14</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/javascript/">javascript</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>紀錄幾個常見的 JS Promises!</p>
+<a id="more"></a>
+<h2 id="Promise-all"><a href="#Promise-all" class="headerlink" title="Promise.all"></a>Promise.all</h2><p><code>Promise.all</code> 一定要所有的 Promise 都被 <code>resolved</code> 才可以，不然會跳error，<br>但全部的Promise還是會完成執行</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> p1 = <span class="built_in">Promise</span>.resolve(<span class="string">'p1'</span>);</div><div class="line"></div><div class="line"><span class="keyword">const</span> p2 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> reject(<span class="string">'rejected p2'</span>), <span class="number">2000</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">const</span> p3 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> resolve(<span class="string">'p3'</span>), <span class="number">3000</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="built_in">Promise</span>.all([p1, p2, p3])</div><div class="line">  .then(<span class="built_in">console</span>.log)</div><div class="line">  .catch(<span class="built_in">console</span>.error) <span class="comment">// error: 'rejected p2'</span></div></pre></td></tr></table></figure>
+<p>所以就會造成也許有些 Promise 其實是被 <code>resolved</code>，<br>但卻因為其中一個 <code>rejected</code> 無法進行一般的結果處理，<br>而且收到error的時間點搞不好有些Promise還沒有執行完畢<br>這時候就可以考慮忽略error handling並改成以下寫法<br>（像是要關閉DB連線的時候，要等每一個Promise都真的處理完才可以關閉）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// p1, p2, p3不變</span></div><div class="line"></div><div class="line"><span class="built_in">Promise</span>.all([</div><div class="line">  p1.catch(<span class="function"><span class="params">err</span> =&gt;</span> err), </div><div class="line">  p2.catch(<span class="function"><span class="params">err</span> =&gt;</span> err), </div><div class="line">  p3.catch(<span class="function"><span class="params">err</span> =&gt;</span> err)</div><div class="line">]).then(<span class="built_in">console</span>.log)</div><div class="line">  .catch(<span class="built_in">console</span>.error) <span class="comment">// ["p1", "rejected p2", "p3"]</span></div></pre></td></tr></table></figure>
+<h2 id="async-await"><a href="#async-await" class="headerlink" title="async / await"></a>async / await</h2><p><code>async / await</code> 真是好東西，尤其是寫到一堆promise的時候快分不清楚誰是誰的時候(?)</p>
+<p>不過要記住 async function <strong>回傳的一定是一個 Promise</strong>，<br>而且要用 await 的話一定要用 async function 包住，<br>不能中途冒出一個 <code>const fulfilledPromise = await request(&quot;/some/promise&quot;)</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">greetFromAjaxRequest</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">const</span> greeting = <span class="keyword">await</span> request(<span class="string">"/hi/from/somewhere"</span>); <span class="comment">// request will return a promise</span></div><div class="line">    <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;greeting&#125;</span>, <span class="subst">$&#123;name&#125;</span>!`</span>;</div><div class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</div><div class="line">     <span class="keyword">throw</span> <span class="built_in">Error</span>(<span class="string">'Oops, something wrong!'</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">greetFromAjaxRequest(<span class="string">"Trina"</span>)</div><div class="line">  .then(<span class="built_in">console</span>.log)</div><div class="line">  .catch(<span class="built_in">console</span>.error)</div></pre></td></tr></table></figure>
+<h3 id="多個-await"><a href="#多個-await" class="headerlink" title="多個 await"></a>多個 await</h3><p>如果有多個await放在一起，<br>它就會照著順序等到上一個promise resolved了以後，才會執行<br>所以可以拿來chaining</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> moment = <span class="built_in">require</span>(<span class="string">'moment'</span>);</div><div class="line"></div><div class="line"><span class="keyword">const</span> p1 = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">Promise</span>.resolve(<span class="string">'p1'</span>);</div><div class="line"><span class="keyword">const</span> p2 = <span class="function">(<span class="params">p1</span>) =&gt;</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(moment() + <span class="string">' resolve p2'</span>, <span class="string">'result from p1:'</span>, p1);</div><div class="line">    resolve(<span class="string">'p2'</span>);</div><div class="line">  &#125;, <span class="number">5000</span>);</div><div class="line">&#125;);</div><div class="line"><span class="keyword">const</span> p3 = <span class="function">(<span class="params">p2</span>) =&gt;</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(moment() + <span class="string">' resolve p3'</span>, <span class="string">'result from p2:'</span>, p2);</div><div class="line">    resolve(<span class="string">'p3'</span>);</div><div class="line">  &#125;, <span class="number">2000</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">multiAwait</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">const</span> rp1 = <span class="keyword">await</span> p1(); <span class="comment">// 起始時執行</span></div><div class="line">    <span class="built_in">console</span>.log(moment() + <span class="string">' rp1'</span>); <span class="comment">// 等到 p1 resolved 之後執行</span></div><div class="line">    <span class="keyword">const</span> rp2 = <span class="keyword">await</span> p2(rp1); <span class="comment">// 等到 p1 resolved 之後執行</span></div><div class="line">    <span class="built_in">console</span>.log(moment() + <span class="string">' rp2'</span>); <span class="comment">// 等到 p1 &amp; p2 resolved 之後執行</span></div><div class="line">    <span class="keyword">const</span> rp3 = <span class="keyword">await</span> p3(rp2); <span class="comment">// 等到 p1 &amp; p2 resolved 之後執行</span></div><div class="line">    <span class="built_in">console</span>.log(moment() + <span class="string">' rp3'</span>); <span class="comment">// 等到 p1 &amp; p2 &amp; p3 resolved 之後執行</span></div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="string">'all promises resolved'</span>;</div><div class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'err'</span>, e);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>執行</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multiAwait().then(<span class="built_in">console</span>.log);</div></pre></td></tr></table></figure>
+<p>會出以下結果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1501754077891 rp1</div><div class="line">1501754082894 resolve p2</div><div class="line">1501754082895 rp2</div><div class="line">1501754084895 resolve p3</div><div class="line">1501754084896 rp3</div><div class="line">all promises resolved</div></pre></td></tr></table></figure></p>
+<h3 id="多個-await-but-先跑-promise"><a href="#多個-await-but-先跑-promise" class="headerlink" title="多個 await but 先跑 promise"></a>多個 await but 先跑 promise</h3><p>下面的 <code>p1</code>, <code>p2</code>, <code>p3</code> 其實在起始的時候就已經執行了<br>(因為它不是return一個promise，而是直接 new 一個promise)<br>所以跟 promise chaining 沒有關係<br>但除了<code>await</code>以外的部分<br>還是會等到它自己之前的promise都resolved了之後才會執行</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> moment = <span class="built_in">require</span>(<span class="string">'moment'</span>);</div><div class="line"></div><div class="line"><span class="keyword">const</span> p1 = <span class="built_in">Promise</span>.resolve(<span class="string">'p1'</span>);</div><div class="line"><span class="keyword">const</span> p2 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(moment() + <span class="string">' resolve p2'</span>);</div><div class="line">    resolve(<span class="string">'p2'</span>);</div><div class="line">  &#125;, <span class="number">5000</span>);</div><div class="line">&#125;);</div><div class="line"><span class="keyword">const</span> p3 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(moment() + <span class="string">' resolve p3'</span>);</div><div class="line">    resolve(<span class="string">'p3'</span>);</div><div class="line">  &#125;, <span class="number">2000</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">multiAwait</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">const</span> rp1 = <span class="keyword">await</span> p1; <span class="comment">// 起始時執行</span></div><div class="line">    <span class="built_in">console</span>.log(moment() + <span class="string">' rp1'</span>); <span class="comment">// 等到 p1 resolved 之後執行</span></div><div class="line">    <span class="keyword">const</span> rp2 = <span class="keyword">await</span> p2; <span class="comment">// 起始時執行</span></div><div class="line">    <span class="built_in">console</span>.log(moment() + <span class="string">' rp2'</span>); <span class="comment">// 等到 p1 &amp; p2 resolved 之後執行</span></div><div class="line">    <span class="keyword">const</span> rp3 = <span class="keyword">await</span> p3; <span class="comment">// 起始時執行</span></div><div class="line">    <span class="built_in">console</span>.log(moment() + <span class="string">' rp3'</span>); <span class="comment">// 等到 p1 &amp; p2 &amp; p3 resolved 之後執行</span></div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="string">'all promises resolved'</span>;</div><div class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'err'</span>, e);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>執行</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multiAwait().then(<span class="built_in">console</span>.log);</div></pre></td></tr></table></figure>
+<p>會出以下結果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1501211897186 rp1</div><div class="line">1501211899171 resolve p3 // after 2 secs</div><div class="line">1501211902171 resolve p2 // after 5 secs</div><div class="line">1501211902171 rp2 </div><div class="line">1501211902172 rp3 // p3 兩秒後就 resolved 了，但因為程式碼順序(?)的關係，要等到 p1, p2, p3 都 resolved 之後才會被執行</div><div class="line">all promises resolved</div></pre></td></tr></table></figure>
+<h2 id="Chaining"><a href="#Chaining" class="headerlink" title="Chaining"></a>Chaining</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">promiseFactory</span>(<span class="params">sec, index</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> resolve(<span class="string">"promise "</span> +  index + <span class="string">" resolved in "</span> + sec + <span class="string">"at"</span> + <span class="built_in">Math</span>.round(<span class="keyword">new</span> <span class="built_in">Date</span>().getTime() / <span class="number">1000</span>)), sec);</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> myPromises = [ </div><div class="line">  <span class="function"><span class="params">()</span> =&gt;</span> promiseFactory(<span class="number">1000</span>, <span class="number">1</span>), </div><div class="line">  () =&gt; promiseFactory(<span class="number">1000</span>, <span class="number">2</span>), </div><div class="line">  () =&gt; promiseFactory(<span class="number">1000</span>, <span class="number">3</span>) </div><div class="line">];</div><div class="line"></div><div class="line"><span class="comment">// not chaining (concurrent)</span></div><div class="line">myPromises.forEach(<span class="function"><span class="params">promise</span> =&gt;</span> &#123;</div><div class="line">    promise().then(<span class="built_in">console</span>.log);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// not chaining (concurrent)</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> promise <span class="keyword">of</span> myPromises) &#123;</div><div class="line">    promise().then(<span class="built_in">console</span>.log);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// chaining (in order)</span></div><div class="line">myPromises.reduce(<span class="function">(<span class="params">resolved, promise</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">return</span> resolved.then(promise).then(<span class="built_in">console</span>.log);</div><div class="line">&#125;, <span class="built_in">Promise</span>.resolve(<span class="string">'ok'</span>));</div></pre></td></tr></table></figure>
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+    </div>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise-all"><span class="toc-number">1.</span> <span class="toc-text">Promise.all</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#async-await"><span class="toc-number">2.</span> <span class="toc-text">async / await</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#多個-await"><span class="toc-number">2.1.</span> <span class="toc-text">多個 await</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多個-await-but-先跑-promise"><span class="toc-number">2.2.</span> <span class="toc-text">多個 await but 先跑 promise</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chaining"><span class="toc-number">3.</span> <span class="toc-text">Chaining</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://tri613.github.io/2017/11/14/promises/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://tri613.github.io/2017/11/14/promises/&text=Javascript Promises"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://tri613.github.io/2017/11/14/promises/&title=Javascript Promises"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tri613.github.io/2017/11/14/promises/&is_video=false&description=Javascript Promises"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Javascript Promises&body=Check out this article: http://tri613.github.io/2017/11/14/promises/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://tri613.github.io/2017/11/14/promises/&title=Javascript Promises"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://tri613.github.io/2017/11/14/promises/&title=Javascript Promises"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://tri613.github.io/2017/11/14/promises/&title=Javascript Promises"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://tri613.github.io/2017/11/14/promises/&title=Javascript Promises"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://tri613.github.io/2017/11/14/promises/&name=Javascript Promises&description=&lt;p&gt;紀錄幾個常見的 JS Promises!&lt;/p&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 Trina Lu
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-67482141-4', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'tri613-github-io';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
